@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/doctrine/annotations" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/doctrine/lexer" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/firebase/php-jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/google/recaptcha" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/guzzlehttp/guzzle" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/guzzlehttp/ringphp" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/guzzlehttp/streams" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/league/csv" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/mailgun/mailgun-php" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/react/promise" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/symfony/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/zircote/swagger-php" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

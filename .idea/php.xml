@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/application/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/application/vendor/google/recaptcha" />
+      <path value="$PROJECT_DIR$/application/vendor/league/csv" />
+      <path value="$PROJECT_DIR$/application/vendor/zircote/swagger-php" />
+      <path value="$PROJECT_DIR$/application/vendor/composer" />
+      <path value="$PROJECT_DIR$/application/vendor/guzzlehttp/streams" />
+      <path value="$PROJECT_DIR$/application/vendor/guzzlehttp/ringphp" />
+      <path value="$PROJECT_DIR$/application/vendor/mailgun/mailgun-php" />
+      <path value="$PROJECT_DIR$/application/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/application/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/application/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/application/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/application/vendor/doctrine/lexer" />
+    </include_path>
+  </component>
+</project>

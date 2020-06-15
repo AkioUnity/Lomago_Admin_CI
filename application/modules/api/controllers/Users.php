@@ -211,7 +211,7 @@ class Users extends API_Controller
     {
         $phone=substr($phone,4);
         $wpDb = $this->load->database('lamoga', TRUE);
-        $query = $wpDb->select('ID,user_login')->like('rufnummer_1', $phone)->from('pts_useradressen')->get();
+        $query = $wpDb->select('ID,user_login')->like('rufnummer_3', $phone)->from('pts_useradressen')->get();
         if ($query->num_rows() > 0) {
             return $query->row();
         }

@@ -1,0 +1,27 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+
+### Send POST request with json body
+POST https://www.lomago.io/whatsapp/api/users/send
+Content-Type: application/json
+
+{
+  "phone": "0040746320561",
+  "direction": "o",
+  "text": "Ich+berater+def",
+  "price": 120,
+  "url": "lamoga.de",
+  "client_id": "56",
+  "auth": "3d7fhezeTuZfkiedopdWq-12$S",
+  "hash": "b2d3f13d278b2dccfce3abcf44fbb147",
+  "timestamp": 1592987524,
+  "dialog_id": "24",
+  "profil_id": "115-1",
+  "service_id": "WA"
+}
+
+###

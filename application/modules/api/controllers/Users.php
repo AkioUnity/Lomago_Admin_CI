@@ -188,12 +188,12 @@ class Users extends API_Controller
     {
         $phone = substr($phone, 4);
         $wpDb = $this->load->database('lamoga', TRUE);
-        $query = $wpDb->select('ID,user_login')->like('rufnummer_3', $phone)->from('pts_useradressen')->get();
+        $query = $wpDb->select('ID,user_login')->like('telefon_mobil', $phone)->from('pts_useradressen')->get();
         if ($query->num_rows() > 0) {
             return $query->row();
         }
         else{
-            log_message('error', $phone.' not found rufnummer_3 in pts_useradressen');
+            log_message('error', $phone.' not found telefon_mobil or rufnummer_3 in pts_useradressen');
         }
         return null;
     }

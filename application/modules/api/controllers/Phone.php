@@ -16,10 +16,11 @@ class Phone extends API_Controller
         $sql = "SELECT LAMOGA_WAF_request.user_id,LAMOGA_WAF_request.type,LAMOGA_WAF_request.customer_phone,LAMOGA_WAF_request.status,pts_useradressen.user_login as name FROM LAMOGA_WAF_request INNER JOIN pts_useradressen on LAMOGA_WAF_request.user_id=pts_useradressen.ID WHERE consultant_id=" . $user_id;
         $res = $wpDb->query($sql)->result();
         foreach ($res as $row) {
-            $sql = "select text from w_receive_messages where (sender_id=" . $user_id . " and receiver_id=" . $row->user_id . ") or (sender_id=" . $row->user_id . " and receiver_id=" . $user_id . ") order by id desc limit 1";
+            $sql = "select text,time from w_receive_messages where (((sender_id=" . $user_id . " and receiver_id=" . $row->user_id . ") or (sender_id=" . $row->user_id . " and receiver_id=" . $user_id . "))  and event='".$row->type."' ) order by id desc limit 1";
             $message = $this->db->query($sql)->row();
             if (isset($message)) {
                 $row->lastMessage = $message->text;
+                $row->time = $message->time;
             }
             $row->balance=$this->GetBalance($row->user_id)->credit_available;
             $row->profileImage = "https://bootdey.com/img/Content/avatar/avatar5.png";
@@ -29,10 +30,11 @@ class Phone extends API_Controller
 
     //    http://www.lomago.io/whatsapp/api/phone/messages/104/9/facebook
     // http://www.lomago.io/whatsapp/api/phone/messages/115/114/whatsapp
+    // http://www.lomago.io/whatsapp/api/phone/messages/105/9/telegram
     // sometimes.. error  (sender_id=whatsapp and receiver_id=114) and event='undefined')
     public function messages_get($user1, $user2,$type)
     {
-        $sql = "SELECT * FROM (SELECT id,text,time,sender_id from w_receive_messages where ((sender_id=" . $user1 . " and receiver_id=" . $user2 . ") or (sender_id=" . $user2 . " and receiver_id=" . $user1 . ") and event='".$type."')  ORDER BY id DESC limit 14) sub ORDER BY id";
+        $sql = "SELECT * FROM (SELECT id,text,time,sender_id from w_receive_messages where (((sender_id=" . $user1 . " and receiver_id=" . $user2 . ") or (sender_id=" . $user2 . " and receiver_id=" . $user1 . ")) and event='".$type."')  ORDER BY id DESC limit 14) sub ORDER BY id";
         $messages = $this->db->query($sql)->result();
         $this->response($messages);
     }

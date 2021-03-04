@@ -69,6 +69,7 @@ $config['ci_bootstrap'] = array(
             'url'		=> 'auto',
             'icon'		=> 'fa fa-cogs',
             'children'  => array(
+                'General'			=> 'auto/text/general',
                 'Whatsapp'			=> 'auto/text/whatsapp',
                 'Facebook'		=> 'auto/text/facebook',
                 'Telegram'	=> 'auto/text/telegram',

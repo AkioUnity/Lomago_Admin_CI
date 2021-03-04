@@ -252,34 +252,47 @@ class Users extends API_Controller
     }
 
     //https://www.lomago.io/whatsapp/api/users/send
+    // for Gerd
     public function send_post()
     {
         $data = $this->post();
         $service_id=$data['service_id'];
         $profile_ids=explode("-",$data['profil_id']);
         $consultant_id=$profile_ids[0];
+        $send=array();
+        $send['text'] = $data['text'];
+
         if ($service_id=='WA'){
-            $send=array();
             $send['event'] = 'whatsapp';
             $send['token'] = $this->wabox_token;
             $send['uid'] = $this->wa_phone;
             $send['to'] = $data['phone'];
-            $send['text'] = $data['text'];
             $send['custom_uid'] = time();
             $res = $this->send_message($send);
 
             unset($send['to']);
             unset($send['custom_uid']);
-            $send['sender_id']=$consultant_id;
-            $send['receiver_id']=$data['client_id'];
+        }
+        else {
+            if ($service_id=='FB')
+                $type="facebook";
+            else
+                $type="telegram";
+            $url = 'https://www.lomago.io:1337/send?';
+            $url = $url . "page_id=" . $data['phone'] . "&text=" . urlencode($data['text']) . "&type=".$type;
+            log_message('error', $type.' data: '.json_encode($data));
+            log_message('error', $url);
+            $res = json_decode($this->getCURL($url), true);
 
-            $send['time'] = date('Y-m-d H:i:s', time());
-            $this->load->model('w_receive_message_model', 'receive_model');
-            $this->receive_model->insert($send);
+            $send['event'] = $type;
         }
-        else if ($service_id=='FB'){
-            $res= "yet not done for FB";
-        }
+        $send['sender_id']=$consultant_id;
+        $send['receiver_id']=$data['client_id'];
+
+        $send['time'] = date('Y-m-d H:i:s', time());
+        $this->load->model('w_receive_message_model', 'receive_model');
+        $this->receive_model->insert($send);
+
         $this->response($res);
     }
 
@@ -308,6 +321,8 @@ class Users extends API_Controller
         unset($send['to']);
         unset($send['custom_uid']);
         unset($send['page_id']);
+        unset($send['type']);
+
         $send['time'] = date('Y-m-d H:i:s', time());
         $this->load->model('w_receive_message_model', 'receive_model');
         $this->receive_model->insert($send);
@@ -362,11 +377,12 @@ class Users extends API_Controller
 //sender_id:sender_id,
 //receiver_id:receiver_id,
 //text: message
-    public function billingServer_post()  //from facebook
+    public function billingServer_post()  //from facebook,telegram of node.js
     {
         $send = $this->post();
         $LAMOGA_WAF = $this->getLAMOGA_WAF($send);
-        $send['type']="FB";
+        $send['type']=($send['type']=='facebook')?"FB":"TG";
+
         $send['to']=$send['receiver_id'];
         $send['dir']=($send['sender_id']==$LAMOGA_WAF->user_id)?'i':'o';
         $res = $this->SendBillingServer($send, $LAMOGA_WAF);

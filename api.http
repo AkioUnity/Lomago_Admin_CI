@@ -24,4 +24,30 @@ Content-Type: application/json
   "service_id": "WA"
 }
 
+### from Epha to Akio for whatsapp send
+
+POST https://www.lomago.io/whatsapp/api/users/sendMessage
+Content-Type: application/json
+
+{
+  "text": "api test",
+  "sender_id": 103,
+  "receiver_id": 9,
+  "page_id": "008562055442940",
+  "type": "whatsapp"
+}
+
+###  from Irina to Heino (Whatsapp send)
+
+POST https://www.lomago.io/whatsapp/api/users/sendMessage
+Content-Type: application/json
+
+{
+  "text": "api test",
+  "sender_id": 105,
+  "receiver_id": 110,
+  "page_id": "004915155766438",
+  "type": "whatsapp"
+}
+
 ###

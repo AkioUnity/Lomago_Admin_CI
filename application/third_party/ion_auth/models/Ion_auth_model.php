@@ -960,7 +960,7 @@ class Ion_auth_model extends CI_Model
 	 * @return bool
 	 * @author Mathew
 	 **/
-	public function login($identity, $password, $remember=FALSE)
+	public function login($identity, $password, $remember=FALSE,$clientnumber=0)
 	{
 		$this->trigger_events('pre_login');
 
@@ -1001,9 +1001,13 @@ class Ion_auth_model extends CI_Model
 				{
 					$this->trigger_events('post_login_unsuccessful');
 					$this->set_error('login_unsuccessful_not_active');
-
 					return FALSE;
 				}
+				if ($clientnumber!='00001'){
+                    $this->trigger_events('post_login_unsuccessful');
+                    $this->set_error('Client_Number_not_match');
+                    return FALSE;
+                }
 
 				$this->set_session($user);
 

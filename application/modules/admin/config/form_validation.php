@@ -15,6 +15,11 @@ $config = array(
 			'label'		=> 'Username',
 			'rules'		=> 'required',
 		),
+        array(
+            'field'		=> 'clientnumber',
+            'label'		=> 'Client Number',
+            'rules'		=> 'required',
+        ),
 		array(
 			'field'		=> 'password',
 			'label'		=> 'Password',

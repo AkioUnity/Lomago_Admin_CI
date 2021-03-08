@@ -20,7 +20,7 @@ class Login extends MY_Controller {
 			$password = $this->input->post('password');
 			$remember = ($this->input->post('remember')=='on');
 			
-			if ($this->ion_auth->login($identity, $password, $remember))
+			if ($this->ion_auth->login($identity, $password, $remember,$this->input->post('clientnumber')))
 			{
 				// login succeed
 				$messages = $this->ion_auth->messages();

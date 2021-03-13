@@ -188,7 +188,7 @@ class Users extends API_Controller
     {
         $phone = substr($phone, 4);
         $wpDb = $this->load->database('lamoga', TRUE);
-        $query = $wpDb->select('ID,user_login')->like('telefon_mobil', $phone)->from('pts_useradressen')->get();
+        $query = $wpDb->select('ID,user_login')->like('telefon_mobil', $phone)->from('pts_useradressen'.$this->wa_portal_id)->get();
         if ($query->num_rows() > 0) {
             return $query->row();
         }
@@ -202,7 +202,7 @@ class Users extends API_Controller
     {
         $phone = substr($phone, 4);
         $wpDb = $this->load->database('lamoga', TRUE);
-        $query = $wpDb->select('ID,bezeichnung')->like('mobilenumber_1', $phone)->from('pts_berater_profile')->get();
+        $query = $wpDb->select('ID,bezeichnung')->like('mobilenumber_1', $phone)->from('pts_berater_profile'.$this->wa_portal_id)->get();
         if ($query->num_rows() > 0) {
             return $query->row();
         }
@@ -215,7 +215,7 @@ class Users extends API_Controller
     public function getCustomerPhone($phone)  //from consultant to customer
     {
         $wpDb = $this->load->database('lamoga', TRUE);
-        $query = $wpDb->select('id,customer_phone,sbid,consultant_id as sender_id,user_id as receiver_id')->like('consultant_phone', $phone)->from('LAMOGA_WAF_request')->get();
+        $query = $wpDb->select('id,customer_phone,sbid,consultant_id as sender_id,user_id as receiver_id')->like('consultant_phone', $phone)->from('LAMOGA_WAF_request'.$this->wa_portal_id)->get();
 
         if ($query->num_rows() > 0) {
             $res = $query->row();
@@ -228,7 +228,7 @@ class Users extends API_Controller
     public function getConsultantPhone($phone)
     {
         $wpDb = $this->load->database('lamoga', TRUE);
-        $query = $wpDb->select('id,consultant_phone,sbid,user_id as sender_id,consultant_id as receiver_id')->like('customer_phone', $phone)->from('LAMOGA_WAF_request')->get();
+        $query = $wpDb->select('id,consultant_phone,sbid,user_id as sender_id,consultant_id as receiver_id')->like('customer_phone', $phone)->from('LAMOGA_WAF_request'.$this->wa_portal_id)->get();
         if ($query->num_rows() > 0) {
             $res = $query->row();
             $res->phone = $res->consultant_phone;
@@ -301,7 +301,7 @@ class Users extends API_Controller
     {
         $send = $this->post();
         $wpDb = $this->load->database('lamoga', TRUE);
-        $query = $wpDb->select('customer_phone,status')->where('user_id', $send['receiver_id'])->from('LAMOGA_WAF_request')->get();
+        $query = $wpDb->select('customer_phone,status')->where('user_id', $send['receiver_id'])->from('LAMOGA_WAF_request'.$this->wa_portal_id)->get();
         $res = $query->row();
         $send['event'] = 'whatsapp';
         $send['token'] = $this->wabox_token;
@@ -393,7 +393,7 @@ class Users extends API_Controller
     {
         $wpDb = $this->load->database('lamoga', TRUE);
         $where='(user_id='.$send['sender_id'].' and consultant_id='.$send['receiver_id'].') or (user_id='.$send['receiver_id'].' and consultant_id='.$send['sender_id'].')';
-        $query = $wpDb->select('id,user_id,sbid')->where($where)->from('LAMOGA_WAF_request')->get();
+        $query = $wpDb->select('id,user_id,sbid')->where($where)->from('LAMOGA_WAF_request'.$this->wa_portal_id)->get();
 
         if ($query->num_rows() > 0) {
             $res = $query->row();

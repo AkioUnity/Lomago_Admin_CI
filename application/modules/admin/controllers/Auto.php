@@ -13,10 +13,10 @@ class Auto extends Admin_Controller {
             foreach ($text as $key=>$element){
 //                echo $key.' '.$element;
                 $wpDb->where('id', $ids[$key]);
-                $wpDb->update('auto_messages', array('text'=>$element));
+                $wpDb->update('auto_messages'.$this->wa_portal_id, array('text'=>$element));
             }
         }
-        $query = $wpDb->select('*')->where('type', $type)->from('auto_messages')->get();
+        $query = $wpDb->select('*')->where('type', $type)->from('auto_messages'.$this->wa_portal_id)->get();
         $this->mViewData['results'] = $query->result();
         $this->mPageTitle = $type.' block message';
         $this->mViewData['type'] = $type;

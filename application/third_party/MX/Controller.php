@@ -39,6 +39,7 @@ require dirname(__FILE__).'/Base.php';
 class MX_Controller 
 {
 	public $autoload = array();
+	public $wa_portal_id='_17483';
 	
 	public function __construct() 
 	{

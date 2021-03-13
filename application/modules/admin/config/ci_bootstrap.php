@@ -46,7 +46,8 @@ $config['ci_bootstrap'] = array(
 		'screen' => array(
 			'assets/dist/admin/adminlte.min.css',
 			'assets/dist/admin/lib.min.css',
-			'assets/dist/admin/app.min.css'
+			'assets/dist/admin/app.min.css',
+            'assets/custom.css',
 		)
 	),
 
@@ -64,6 +65,11 @@ $config['ci_bootstrap'] = array(
 			'url'		=> '',
 			'icon'		=> 'fa fa-home',
 		),
+        'service' => array(
+            'name'		=> 'Services',
+            'url'		=> 'service',
+            'icon'		=> 'ion ion-edit',
+        ),
         'auto' => array(
             'name'		=> 'Text Blocks',
             'url'		=> 'auto',
@@ -114,24 +120,24 @@ $config['ci_bootstrap'] = array(
 //			'url'		=> 'cover_photo',
 //			'icon'		=> 'ion ion-image',	// can use Ionicons instead of FontAwesome
 //		),
-		'panel' => array(
-			'name'		=> 'Admin Panel',
-			'url'		=> 'panel',
-			'icon'		=> 'fa fa-cog',
-			'children'  => array(
-				'Admin Users'			=> 'panel/admin_user',
-				'Create Admin User'		=> 'panel/admin_user_create',
-				'Admin User Groups'		=> 'panel/admin_user_group',
-			)
-		),
-		'util' => array(
-			'name'		=> 'Utilities',
-			'url'		=> 'util',
-			'icon'		=> 'fa fa-cogs',
-			'children'  => array(
-				'Database Versions'		=> 'util/list_db',
-			)
-		),
+//		'panel' => array(
+//			'name'		=> 'Admin Panel',
+//			'url'		=> 'panel',
+//			'icon'		=> 'fa fa-cog',
+//			'children'  => array(
+//				'Admin Users'			=> 'panel/admin_user',
+//				'Create Admin User'		=> 'panel/admin_user_create',
+//				'Admin User Groups'		=> 'panel/admin_user_group',
+//			)
+//		),
+//		'util' => array(
+//			'name'		=> 'Utilities',
+//			'url'		=> 'util',
+//			'icon'		=> 'fa fa-cogs',
+//			'children'  => array(
+//				'Database Versions'		=> 'util/list_db',
+//			)
+//		),
 		'logout' => array(
 			'name'		=> 'Sign Out',
 			'url'		=> 'panel/logout',

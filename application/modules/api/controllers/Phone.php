@@ -13,7 +13,7 @@ class Phone extends API_Controller
     public function chats_get($user_id)
     {
         $wpDb = $this->load->database('lamoga', TRUE);
-        $sql = "SELECT LAMOGA_WAF_request.user_id,LAMOGA_WAF_request.type,LAMOGA_WAF_request.customer_phone,LAMOGA_WAF_request.status,pts_useradressen.user_login as name FROM LAMOGA_WAF_request INNER JOIN pts_useradressen on LAMOGA_WAF_request.user_id=pts_useradressen.ID WHERE consultant_id=" . $user_id;
+        $sql = "SELECT LAMOGA_WAF_request".$this->wa_portal_id.".user_id,LAMOGA_WAF_request".$this->wa_portal_id.".type,LAMOGA_WAF_request".$this->wa_portal_id.".customer_phone,LAMOGA_WAF_request".$this->wa_portal_id.".status,pts_useradressen".$this->wa_portal_id.".user_login as name FROM LAMOGA_WAF_request".$this->wa_portal_id." INNER JOIN pts_useradressen".$this->wa_portal_id." on LAMOGA_WAF_request".$this->wa_portal_id.".user_id=pts_useradressen".$this->wa_portal_id.".ID WHERE consultant_id=" . $user_id;
         $res = $wpDb->query($sql)->result();
         foreach ($res as $row) {
             $sql = "select text,time from w_receive_messages where (((sender_id=" . $user_id . " and receiver_id=" . $row->user_id . ") or (sender_id=" . $row->user_id . " and receiver_id=" . $user_id . "))  and event='".$row->type."' ) order by id desc limit 1";

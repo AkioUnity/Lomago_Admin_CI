@@ -30,6 +30,7 @@ class Whatsapp extends Admin_Controller {
         $crud->display_as('text','Message Content')->display_as( 'dir','Direction');
         $crud->order_by('id','desc');
         $crud->unset_add();
+        $crud->unset_edit();
         $this->mPageTitle = 'Received Message list';
         $this->render_crud();
     }

@@ -95,16 +95,16 @@ $config['ci_bootstrap'] = array(
                 'Bot Messages'		=> 'whatsapp/step',
             )
         ),
-		'user' => array(
-			'name'		=> 'Users',
-			'url'		=> 'user',
-			'icon'		=> 'fa fa-users',
-			'children'  => array(
-				'List'			=> 'user',
-				'Create'		=> 'user/create',
-				'User Groups'	=> 'user/group',
-			)
-		),
+//		'user' => array(
+//			'name'		=> 'Users',
+//			'url'		=> 'user',
+//			'icon'		=> 'fa fa-users',
+//			'children'  => array(
+//				'List'			=> 'user',
+//				'Create'		=> 'user/create',
+//				'User Groups'	=> 'user/group',
+//			)
+//		),
 //		'blog' => array(
 //			'name'		=> 'Blog',
 //			'url'		=> 'blog',

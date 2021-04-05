@@ -40,6 +40,10 @@ class Grocery_crud_model  extends CI_Model  {
         parent::__construct();
     }
 
+    public function setDb($newDb){
+        $this->db=$newDb;
+    }
+
     function db_table_exists($table_name = null)
     {
     	return $this->db->table_exists($table_name);

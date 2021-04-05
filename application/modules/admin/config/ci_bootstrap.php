@@ -95,6 +95,16 @@ $config['ci_bootstrap'] = array(
                 'Bot Messages'		=> 'whatsapp/step',
             )
         ),
+		'customers' => array(
+			'name'		=> 'Customers',
+			'url'		=> 'user/customers',
+			'icon'		=> 'fa fa-users'
+		),
+        'consultants' => array(
+            'name'		=> 'Consultants',
+            'url'		=> 'user/consultants',
+            'icon'		=> 'fa fa-user-md'
+        ),
 //		'user' => array(
 //			'name'		=> 'Users',
 //			'url'		=> 'user',

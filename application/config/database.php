@@ -117,3 +117,25 @@ $db['lamoga'] = array(
     'failover' => array(),
     'save_queries' => TRUE
 );
+
+$db['lamoga_hack'] = array(
+    'dsn'	=> '',
+    'hostname' => 'lamoga.de',
+    'username' => 'stuedemann_admin_913',
+    'password' => '2AvO8iy7XoDIHI25Jun3veFAS7W1t6',
+    'database' => 'wp_portal_stuedemann_lamoga',
+    'dbdriver' => 'mysqli',
+    'dbprefix' => '',
+    'pconnect' => FALSE,
+    'db_debug' => (ENVIRONMENT !== 'production'),
+    'cache_on' => FALSE,
+    'cachedir' => '',
+    'char_set' => 'utf8',
+    'dbcollat' => 'utf8_general_ci',
+    'swap_pre' => '',
+    'encrypt' => FALSE,
+    'compress' => FALSE,
+    'stricton' => FALSE,
+    'failover' => array(),
+    'save_queries' => TRUE
+);

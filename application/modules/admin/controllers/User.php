@@ -9,6 +9,20 @@ class User extends Admin_Controller {
 		$this->load->library('form_builder');
 	}
 
+	public function customers(){
+        $crud = $this->generate_crud('pts_useradressen');
+        $crud->newDb=$this->load->database('lamoga_hack', TRUE);
+        $crud->columns('ID','user_login', 'telefon_mobil', 'vorwahl_1', 'rufnummer_3', 'berater_status');
+//            $crud->set_relation_n_n('groups', 'users_groups', 'groups', 'user_id', 'group_id', 'name');
+        $crud->unset_add();
+        $crud->unset_delete();
+        $crud->unset_edit();
+        $crud->unset_view();
+
+        $this->mPageTitle = 'Customers';
+        $this->render_crud();
+    }
+
 	// Frontend User CRUD
 	public function index()
 	{

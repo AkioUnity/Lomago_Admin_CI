@@ -12,14 +12,29 @@ class User extends Admin_Controller {
 	public function customers(){
         $crud = $this->generate_crud('pts_useradressen');
         $crud->newDb=$this->load->database('lamoga_hack', TRUE);
-        $crud->columns('ID','user_login', 'telefon_mobil', 'vorwahl_1', 'rufnummer_3', 'berater_status');
-//            $crud->set_relation_n_n('groups', 'users_groups', 'groups', 'user_id', 'group_id', 'name');
+        $crud->columns('ID','user_login','mentor_id', 'telefon_mobil', 'vorwahl_1', 'rufnummer_3', 'berater_status');
+
         $crud->unset_add();
         $crud->unset_delete();
         $crud->unset_edit();
         $crud->unset_view();
 
         $this->mPageTitle = 'Customers';
+        $this->render_crud();
+    }
+
+    public function consultants(){
+        $crud = $this->generate_crud('pts_berater_profile');
+        $crud->newDb=$this->load->database('lamoga_hack', TRUE);
+        $crud->columns('bezeichnung','ID','mobilenumber_1', 'chatpreis', 'chatpreis_1', 'chatpreis_2', 'chatpreis_3');
+        $crud->set_relation('ID','pts_useradressen','mentor_id');
+        $crud->display_as('ID','Mentor');
+        $crud->unset_add();
+        $crud->unset_delete();
+        $crud->unset_edit();
+        $crud->unset_view();
+
+        $this->mPageTitle = 'Consultants';
         $this->render_crud();
     }
 

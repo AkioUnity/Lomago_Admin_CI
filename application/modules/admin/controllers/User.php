@@ -13,6 +13,7 @@ class User extends Admin_Controller {
         $crud = $this->generate_crud('pts_useradressen');
         $crud->newDb=$this->load->database('lamoga_hack', TRUE);
         $crud->columns('ID','user_login','mentor_id', 'telefon_mobil', 'vorwahl_1', 'rufnummer_3', 'berater_status');
+        $crud->add_action('Commissions', '', 'admin/commission/export', 'fa fa-file-excel-o');
 
         $crud->unset_add();
         $crud->unset_delete();

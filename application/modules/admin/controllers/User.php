@@ -9,7 +9,51 @@ class User extends Admin_Controller {
 		$this->load->library('form_builder');
 	}
 
-	public function customers(){
+    public function connection(){
+        $crud = $this->generate_crud('LAMOGA_WAF_request'.$this->wa_portal_id);
+        $crud->set_subject('Connection Status');
+        $crud->newDb=$this->load->database('lamoga', TRUE);
+        $crud->columns('type','user_id','consultant_name','requested_time', 'status', 'step', 'consultant_phone', 'customer_phone');
+        $crud->display_as('consultant_name','Consultant');
+        $crud->display_as('consultant_phone','Consultant phone or PIN code');
+        $crud->display_as('user_id','Customer');
+
+//        $crud->add_action('Commissions', '', 'admin/commission/export', 'fa fa-file-excel-o');
+        $crud->callback_column('user_id',array($this,'customer_callback'));
+        $crud->callback_column('type',array($this,'type_callback'));
+        $crud->callback_column('status',array($this,'status_callback'));
+        $crud->unset_add();
+        $this->mPageTitle = 'Connection between Consultant and Customers';
+        $this->render_crud();
+    }
+
+    function customer_callback($value, $row)
+    {
+        $wpDb = $this->load->database('lamoga', TRUE);
+        $query = $wpDb->select('user_login')->where('ID', $value)->from('pts_useradressen'.$this->wa_portal_id)->get();
+        if ($query->num_rows() > 0) {
+            $customer=$query->row();
+            return "<b>".$customer->user_login."</b>";
+        }
+    }
+
+    function type_callback($value, $row)
+    {
+        return "<img src=\"".image_url($value).".png"."\" width='25' /> ".$value;
+    }
+
+    function status_callback($value, $row)
+    {
+        if ($value==-1)
+            return "<span class=\"label label-danger\"> Offline </span> ";
+        else if ($value==0)
+            return "<span class=\"label label-warning\"> Request </span> ";
+        else
+            return "<span class=\"label label-success\"> Connected </span> ";
+    }
+
+
+    public function customers(){
         $crud = $this->generate_crud('pts_useradressen');
         $crud->newDb=$this->load->database('lamoga_hack', TRUE);
         $crud->columns('ID','user_login','mentor_id', 'telefon_mobil', 'vorwahl_1', 'rufnummer_3', 'berater_status');
@@ -23,6 +67,7 @@ class User extends Admin_Controller {
         $this->mPageTitle = 'Customers';
         $this->render_crud();
     }
+
 
     public function consultants(){
         $crud = $this->generate_crud('pts_berater_profile');

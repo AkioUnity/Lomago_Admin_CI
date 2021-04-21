@@ -179,7 +179,7 @@ class Users extends API_Controller
 
 //        $wpDb = $this->load->database('lamoga', TRUE);
 //        $data=array('step'=>3);
-//        $wpDb->update('LAMOGA_WAF_request',$data,array('user_id'=>$send['user_id']));
+
 
         $this->response($res);
     }

@@ -26,13 +26,37 @@ class Whatsapp extends Admin_Controller {
     public function received()
     {
         $crud = $this->generate_crud('w_receive_messages');
-        $crud->columns('text', 'phone', 'sender_name', 'dir', 'time','uid');
-        $crud->display_as('text','Message Content')->display_as( 'dir','Direction');
+        $crud->set_subject("Chat History");
+        $crud->columns('event','sender_id','receiver_id','text', 'phone', 'time');
+        $crud->display_as('text','Message Content');
+
+        $crud->display_as('sender_id','Sender');
+        $crud->display_as('receiver_id','Receiver');
+        $crud->callback_column('sender_id',array($this,'customer_callback'));
+        $crud->callback_column('receiver_id',array($this,'customer_callback'));
+        $crud->callback_column('event',array($this,'type_callback'));
+
         $crud->order_by('id','desc');
         $crud->unset_add();
+        $crud->unset_delete();
         $crud->unset_edit();
-        $this->mPageTitle = 'Received Message list';
+        $this->mPageTitle = 'Chat History';
         $this->render_crud();
+    }
+
+    function customer_callback($value, $row)
+    {
+        $wpDb = $this->load->database('lamoga', TRUE);
+        $query = $wpDb->select('user_login')->where('ID', $value)->from('pts_useradressen'.$this->wa_portal_id)->get();
+        if ($query->num_rows() > 0) {
+            $customer=$query->row();
+            return "<b>".$customer->user_login."</b>";
+        }
+    }
+
+    function type_callback($value, $row)
+    {
+        return "<img src=\"".image_url($value).".png"."\" width='25' /> ".$value;
     }
 
     public function agent1()

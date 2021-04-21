@@ -81,8 +81,13 @@ $config['ci_bootstrap'] = array(
                 'Telegram'	=> 'auto/text/telegram',
             )
         ),
+        'connection' => array(
+            'name'		=> 'Connection',
+            'url'		=> 'user/connection',
+            'icon'		=> 'fa fa-connectdevelop',
+        ),
         'received' => array(
-            'name'		=> 'Received Messages',
+            'name'		=> 'Chat History',
             'url'		=> 'whatsapp/received',
             'icon'		=> 'fa fa-comments',
         ),

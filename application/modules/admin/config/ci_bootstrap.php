@@ -110,6 +110,11 @@ $config['ci_bootstrap'] = array(
             'url'		=> 'user/consultants',
             'icon'		=> 'fa fa-user-md'
         ),
+        'setting' => array(
+            'name'		=> 'Setting',
+            'url'		=> 'whatsapp/setting',
+            'icon'		=> 'fa fa-gear',
+        ),
 //		'user' => array(
 //			'name'		=> 'Users',
 //			'url'		=> 'user',

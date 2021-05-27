@@ -8,6 +8,32 @@ class Whatsapp extends Admin_Controller {
 		redirect('whatsapp/agent');
 	}
 
+    public function setting()
+    {
+        $this->load->library('system_message');
+
+        $wpDb = $this->load->database('lamoga', TRUE);
+        $query = $wpDb->select('value')->where('name', 'send_consultant_name')->from('settings')->get();
+        $setting=$query->row();
+
+        if ($this->input->get('value')!=null){
+            $setting->value=$this->input->get('value');
+            $wpDb->where('name', 'send_consultant_name');
+            $wpDb->update('settings', array('value'=>$setting->value));
+        }
+        if ($setting->value=='true'){
+            $this->session->set_flashdata('success', 'Send Consultant Name was Enabled.');
+        }
+        else{
+            $this->session->set_flashdata('success', '');
+            $this->session->set_flashdata('info', 'Send Consultant Name was Disabled.');
+        }
+        $this->mViewData = array(
+            'setting'=>$setting->value
+        );
+        $this->render('setting');
+    }
+
     public function agent()
     {
         $crud = $this->generate_crud('w_dialogflows');

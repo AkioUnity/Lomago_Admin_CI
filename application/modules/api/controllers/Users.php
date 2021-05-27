@@ -65,7 +65,6 @@ class Users extends API_Controller
                     $send['uid'] = $this->wa_phone;
                     $res = $this->send_message($send);
 //                    $send['to']='0049015155766438';
-
                     $res = $this->SendBillingServerWA($send, $LAMOGA_WAF);
 
                     $data['sender_id'] = $LAMOGA_WAF->sender_id;
@@ -252,7 +251,7 @@ class Users extends API_Controller
     }
 
     //https://www.lomago.io/whatsapp/api/users/send
-    // for Gerd
+    // for Gerd  from webchat
     public function send_post()
     {
         $data = $this->post();
@@ -261,6 +260,15 @@ class Users extends API_Controller
         $consultant_id=$profile_ids[0];
         $send=array();
         $send['text'] = $data['text'];
+
+        $wpDb = $this->load->database('lamoga', TRUE);
+        $query = $wpDb->select('value')->where('name', 'send_consultant_name')->from('settings')->get();
+        $res = $query->row();
+        if ($res->value=='true'){
+            $query = $wpDb->select('consultant_name')->where('consultant_id', $consultant_id)->from('LAMOGA_WAF_request'.$this->wa_portal_id)->get();
+            $res = $query->row();
+            $send['text']=$res->consultant_name.': '.$send['text'];
+        }
 
         if ($service_id=='WA'){
             $send['event'] = 'whatsapp';

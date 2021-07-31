@@ -1,0 +1,15 @@
+{
+  "response_status": "OK",
+  "costumer_phone": "2055442940",
+  "consultant_phone_1": "004915905575798",
+  "consultant_phone_2": "",
+  "consultant_phone_3": "",
+  "consultant_price_1": "3",
+  "consultant_price_2": "",
+  "consultant_price_3": "",
+  "main_credit": "200.00",
+  "bonus_credit": "2.60",
+  "total_credit": "202.60",
+  "credit_used_in_session": "4.80",
+  "credit_available": "197.80"
+}

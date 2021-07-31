@@ -1,0 +1,67 @@
+POST https://www.lomago.io/whatsapp/api/users/sendMessage
+Content-Type: application/json
+
+{
+  "text": "api test",
+  "sender_id": 105,
+  "receiver_id": 110,
+  "page_id": "004915155766438",
+  "type": "whatsapp"
+}
+
+<> 2020-09-07T022352.200.json
+
+###
+
+POST https://www.lomago.io/whatsapp/api/users/sendMessage
+Content-Type: application/json
+
+{
+  "text": "api test",
+  "sender_id": 103,
+  "receiver_id": 9,
+  "page_id": "008562055442940",
+  "type": "whatsapp"
+}
+
+<> 2020-09-07T022029.200.json
+
+###
+
+POST https://www.lomago.io/whatsapp/api/users/sendMessage
+Content-Type: application/json
+
+{
+  "text": "api test",
+  "sender_id": 103,
+  "receiver_id": 9,
+  "page_id": "008562055442940",
+  "type": "whatsapp"
+}
+
+<> 2020-09-07T021858.500.html
+
+###
+
+POST https://www.lomago.io/whatsapp/api/users/send
+Content-Type: application/json
+
+{
+  "phone": "0040746320561",
+  "direction": "o",
+  "text": "Ich+berater+def",
+  "price": 120,
+  "url": "lamoga.de",
+  "client_id": "56",
+  "auth": "3d7fhezeTuZfkiedopdWq-12$S",
+  "hash": "b2d3f13d278b2dccfce3abcf44fbb147",
+  "timestamp": 1592987524,
+  "dialog_id": "24",
+  "profil_id": "115-1",
+  "service_id": "WA"
+}
+
+<> 2020-09-07T020142.200.json
+
+###
+

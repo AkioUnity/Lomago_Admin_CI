@@ -9,6 +9,27 @@ class User extends Admin_Controller {
 		$this->load->library('form_builder');
 	}
 
+    public function online(){
+        $crud = $this->generate_crud('fake_onlines');
+        $crud->set_subject('Fake Online Customer');
+        $crud->newDb=$this->load->database('lamoga', TRUE);
+        $crud->field_type('is_weekend','dropdown',array('0' => 'No', '1' => 'Yes'));
+        $crud->field_type('start_time','integer'); //same result
+//        $crud->field_type('end_time','datetime');
+//        $crud->columns('type','user_id','consultant_name','requested_time', 'status', 'step', 'consultant_phone', 'customer_phone');
+//        $crud->display_as('consultant_name','Consultant');
+//        $crud->display_as('consultant_phone','Consultant phone or PIN code');
+//        $crud->display_as('user_id','Customer');
+
+//        $crud->add_action('Commissions', '', 'admin/commission/export', 'fa fa-file-excel-o');
+//        $crud->callback_column('user_id',array($this,'customer_callback'));
+//        $crud->callback_column('type',array($this,'type_callback'));
+//        $crud->callback_column('status',array($this,'status_callback'));
+//        $crud->unset_add();
+        $this->mPageTitle = 'Fake Online Customer Count';
+        $this->render_crud();
+    }
+
     public function connection(){
         $crud = $this->generate_crud('LAMOGA_WAF_request'.$this->wa_portal_id);
         $crud->set_subject('Connection Status');

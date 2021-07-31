@@ -81,6 +81,11 @@ $config['ci_bootstrap'] = array(
                 'Telegram'	=> 'auto/text/telegram',
             )
         ),
+        'online' => array(
+            'name'		=> 'Online Numbers',
+            'url'		=> 'user/online',
+            'icon'		=> 'fa fa-users',
+        ),
         'connection' => array(
             'name'		=> 'Connection',
             'url'		=> 'user/connection',

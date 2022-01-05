@@ -96,6 +96,11 @@ $config['ci_bootstrap'] = array(
             'url'		=> 'whatsapp/received',
             'icon'		=> 'fa fa-comments',
         ),
+        'chatbot_history' => array(
+            'name'		=> 'Chat Bot History',
+            'url'		=> 'chatBot/chatbot_history',
+            'icon'		=> 'fa fa-comments',
+        ),
         'whatsapp' => array(
             'name'		=> 'Whatsapp',
             'url'		=> 'whatsapp',

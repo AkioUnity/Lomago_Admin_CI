@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="add consultant name">
-      <change afterPath="$PROJECT_DIR$/.idea/sshConfigs.xml" afterDir="false" />
+    <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="online numbers">
+      <change afterPath="$PROJECT_DIR$/application/modules/admin/controllers/ChatBot.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/modules/admin/config/ci_bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/admin/config/ci_bootstrap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/modules/admin/controllers/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/admin/controllers/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -654,7 +654,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="D:/Bitnami7.2.34/apache2/htdocs/magento" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/application/modules/admin/controllers" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -664,8 +664,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\work\Lomago\Lomago_Admin_CI\application\modules\admin\views" />
       <recent name="E:\work\Lomago\Lomago_Admin_CI\application\modules\admin\controllers" />
+      <recent name="E:\work\Lomago\Lomago_Admin_CI\application\modules\admin\views" />
       <recent name="E:\work\Lomago\Lomago_Admin_CI\application\models" />
       <recent name="E:\work\Lomago\Lomago_Admin_CI\application\modules\api\controllers" />
       <recent name="D:\Bitnami\apache2\htdocs\ci-whatsapp\application\modules\admin\views\lamoga" />
@@ -905,6 +905,13 @@
       <workItem from="1622824088477" duration="7364000" />
       <workItem from="1625658676871" duration="6885000" />
       <workItem from="1627680943450" duration="2020000" />
+      <workItem from="1627723458051" duration="757000" />
+      <workItem from="1628059702605" duration="14846000" />
+      <workItem from="1628232640029" duration="2563000" />
+      <workItem from="1628412073550" duration="5480000" />
+      <workItem from="1631003097270" duration="1978000" />
+      <workItem from="1637572998503" duration="650000" />
+      <workItem from="1641365883714" duration="3298000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1592222335495</created>
@@ -1004,7 +1011,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622145422798</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="online numbers">
+      <created>1627723506596</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1627723506596</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1068,7 +1082,8 @@
     <MESSAGE value="commission system." />
     <MESSAGE value="add connection history" />
     <MESSAGE value="add consultant name" />
-    <option name="LAST_COMMIT_MESSAGE" value="add consultant name" />
+    <MESSAGE value="online numbers" />
+    <option name="LAST_COMMIT_MESSAGE" value="online numbers" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/application/models/Log_model.php">

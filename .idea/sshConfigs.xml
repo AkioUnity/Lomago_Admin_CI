@@ -2,7 +2,10 @@
 <project version="4">
   <component name="SshConfigs">
     <configs>
-      <sshConfig host="www.lomago.io" id="4dd55625-be7b-4726-a22f-18ff606c58cd" keyPath="E:\work\Lomago\Dialogflow\ssh\oldchatlive.ppk" port="22" customName="aws live" nameFormat="CUSTOM" username="ec2-user">
+      <sshConfig host="www.lomago.io" id="4dd55625-be7b-4726-a22f-18ff606c58cd" keyPath="E:\work\Lomago\Dialogflow\ssh\oldchatlive.ppk" port="22" customName="aws live" nameFormat="CUSTOM" username="ubuntu">
+        <option name="customName" value="aws live" />
+      </sshConfig>
+      <sshConfig host="www.lomago.io" id="f30f1ada-9f62-4e70-ae59-a65bd6aa51d8" keyPath="E:\work\Lomago\Dialogflow\ssh\oldchatlive.ppk" port="22" customName="aws live" nameFormat="CUSTOM" username="ec2-user">
         <option name="customName" value="aws live" />
       </sshConfig>
     </configs>

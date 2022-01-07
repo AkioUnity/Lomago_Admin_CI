@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="online numbers">
-      <change afterPath="$PROJECT_DIR$/application/modules/admin/controllers/ChatBot.php" afterDir="false" />
+    <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="add chatbot history">
+      <change afterPath="$PROJECT_DIR$/application/models/Error_Log_model.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/modules/admin/config/ci_bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/admin/config/ci_bootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/modules/admin/controllers/Whatsapp.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/admin/controllers/Whatsapp.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/modules/api/controllers/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/api/controllers/Users.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -654,7 +656,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/application/modules/admin/controllers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/application/models" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -664,9 +666,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\work\Lomago\Lomago_Admin_CI\application\models" />
       <recent name="E:\work\Lomago\Lomago_Admin_CI\application\modules\admin\controllers" />
       <recent name="E:\work\Lomago\Lomago_Admin_CI\application\modules\admin\views" />
-      <recent name="E:\work\Lomago\Lomago_Admin_CI\application\models" />
       <recent name="E:\work\Lomago\Lomago_Admin_CI\application\modules\api\controllers" />
       <recent name="D:\Bitnami\apache2\htdocs\ci-whatsapp\application\modules\admin\views\lamoga" />
     </key>
@@ -912,6 +914,8 @@
       <workItem from="1631003097270" duration="1978000" />
       <workItem from="1637572998503" duration="650000" />
       <workItem from="1641365883714" duration="3298000" />
+      <workItem from="1641426936215" duration="6728000" />
+      <workItem from="1641502579267" duration="10998000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1592222335495</created>
@@ -1018,7 +1022,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627723506596</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="add chatbot history">
+      <created>1641427094624</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1641427094624</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1083,7 +1094,8 @@
     <MESSAGE value="add connection history" />
     <MESSAGE value="add consultant name" />
     <MESSAGE value="online numbers" />
-    <option name="LAST_COMMIT_MESSAGE" value="online numbers" />
+    <MESSAGE value="add chatbot history" />
+    <option name="LAST_COMMIT_MESSAGE" value="add chatbot history" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/application/models/Log_model.php">

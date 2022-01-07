@@ -49,6 +49,17 @@ class Whatsapp extends Admin_Controller {
         $this->render_crud();
     }
 
+    public function error_log()
+    {
+        $crud = $this->generate_crud('error_logs');
+        $crud->order_by('id','desc');
+        $crud->unset_add();
+        $crud->unset_delete();
+        $crud->unset_edit();
+        $this->mPageTitle = 'Error Logs';
+        $this->render_crud();
+    }
+
     public function received()
     {
         $crud = $this->generate_crud('w_receive_messages');

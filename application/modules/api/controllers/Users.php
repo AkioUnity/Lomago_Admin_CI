@@ -192,7 +192,11 @@ class Users extends API_Controller
             return $query->row();
         }
         else{
-            log_message('error', $phone.' not found telefon_mobil or rufnummer_3 in pts_useradressen');
+            $log = array(
+                'function' => 'getWpUser',
+                'message' => $phone.' not found telefon_mobil or rufnummer_3 in pts_useradressen'
+            );
+            $this->db->insert('error_logs', $log);
         }
         return null;
     }
@@ -206,7 +210,11 @@ class Users extends API_Controller
             return $query->row();
         }
         else{
-            log_message('error', $phone.' not found mobilenumber_1 in pts_berater_profile');
+            $log = array(
+                'function' => 'getWpConsultant',
+                'message' => $phone.' not found mobilenumber_1 in pts_berater_profile'
+            );
+            $this->db->insert('error_logs', $log);
         }
         return null;
     }
@@ -288,10 +296,16 @@ class Users extends API_Controller
                 $type="telegram";
             $url = 'https://www.lomago.io:1337/send?';
             $url = $url . "page_id=" . $data['phone'] . "&text=" . urlencode($data['text']) . "&type=".$type;
-            log_message('error', $type.' data: '.json_encode($data));
-            log_message('error', $url);
+            $log = array(
+                'function' => 'send_post',
+                'type' => 'data',
+                'event' => $type,
+                'message' => json_encode($data)
+            );
+            $this->db->insert('error_logs', $log);
+            $log['message']=$url;
+            $this->db->insert('error_logs', $log);
             $res = json_decode($this->getCURL($url), true);
-
             $send['event'] = $type;
         }
         $send['sender_id']=$consultant_id;
@@ -358,8 +372,13 @@ class Users extends API_Controller
             $send['type']="WA";
             $send['sender_id']=$user->ID;
             return $this->SendBillingServer($send, $LAMOGA_WAF);
-        } else
-            log_message('error', $send['to'] . ' not find ' . json_encode($send));
+        } else{
+            $log = array(
+                'function' => 'SendBillingServerWA',
+                'message' => $send['to'] . ' not find ' . json_encode($send)
+            );
+            $this->db->insert('error_logs', $log);
+        }
         return ($response);
     }
 
@@ -376,9 +395,19 @@ class Users extends API_Controller
         , 'dialog_id' => $LAMOGA_WAF->id, 'profil_id' => $LAMOGA_WAF->sbid
         , 'service_id' => $send['type']
         );
-        log_message('error', 'data: '.json_encode($data));
+        $log = array(
+            'function' => 'SendBillingServer post',
+            'type'=>'data',
+            'message' => json_encode($send)
+        );
+        $this->db->insert('error_logs', $log);
         $response = json_decode($this->postCURL($url, $data));
-        log_message('error', 'res: '.json_encode($response));
+        $log = array(
+            'function' => 'SendBillingServer response',
+            'type'=>'data',
+            'message' => json_encode($response)
+        );
+        $this->db->insert('error_logs', $log);
         return ($response);
     }
 

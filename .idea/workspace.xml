@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="add chatbot history">
-      <change afterPath="$PROJECT_DIR$/application/models/Error_Log_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sshConfigs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sshConfigs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/modules/admin/config/ci_bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/admin/config/ci_bootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api.http" beforeDir="false" afterPath="$PROJECT_DIR$/api.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Errors.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Errors.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/modules/admin/config/grocery_crud.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/admin/config/grocery_crud.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/modules/admin/controllers/Whatsapp.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/admin/controllers/Whatsapp.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/modules/api/controllers/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/api/controllers/Users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/modules/api/controllers/Wp.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/api/controllers/Wp.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -683,6 +688,49 @@
     <option name="REQUEST_HISTORY">
       <list>
         <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1641852705000" />
+                <option name="domain" value="www.lomago.io" />
+                <option name="name" value="ci_session" />
+                <option name="path" value="/" />
+                <option name="value" value="e51htd5i49eglkfnaqqdkknq24erfhlm" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://www.lomago.io/whatsapp/api/users/billingServer" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&#10;  &quot;text&quot;: &quot;api test&quot;,&#10;  &quot;sender_id&quot;: 105,&#10;  &quot;receiver_id&quot;: 110,&#10;  &quot;page_id&quot;: &quot;004915155766438&quot;,&#10;  &quot;type&quot;: &quot;whatsapp&quot;&#10;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="https://www.lomago.io/whatsapp/api/users/billingServer" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&#10;  &quot;text&quot;: &quot;api test&quot;,&#10;  &quot;sender_id&quot;: 105,&#10;  &quot;receiver_id&quot;: 110,&#10;  &quot;page_id&quot;: &quot;004915155766438&quot;,&#10;  &quot;type&quot;: &quot;whatsapp&quot;&#10;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
           <option name="httpMethod" value="POST" />
           <option name="urlBase" value="https://www.lomago.io/whatsapp/api/users/sendMessage" />
           <option name="urlPath" value="" />
@@ -733,7 +781,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="HTTP Request.api#3">
+  <component name="RunManager" selected="HTTP Request.api#4">
     <configuration name="api#1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/api.http">
       <method v="2" />
     </configuration>
@@ -743,8 +791,12 @@
     <configuration name="api#3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/api.http" index="3">
       <method v="2" />
     </configuration>
+    <configuration name="api#4" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/api.http" index="4" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.api#4" />
         <item itemvalue="HTTP Request.api#3" />
         <item itemvalue="HTTP Request.api#2" />
         <item itemvalue="HTTP Request.api#1" />
@@ -915,7 +967,8 @@
       <workItem from="1637572998503" duration="650000" />
       <workItem from="1641365883714" duration="3298000" />
       <workItem from="1641426936215" duration="6728000" />
-      <workItem from="1641502579267" duration="10998000" />
+      <workItem from="1641502579267" duration="20656000" />
+      <workItem from="1641844068472" duration="4424000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1592222335495</created>
@@ -1029,7 +1082,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641427094624</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="add error log message">
+      <created>1641549979874</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1641549979874</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1095,7 +1155,8 @@
     <MESSAGE value="add consultant name" />
     <MESSAGE value="online numbers" />
     <MESSAGE value="add chatbot history" />
-    <option name="LAST_COMMIT_MESSAGE" value="add chatbot history" />
+    <MESSAGE value="add error log message" />
+    <option name="LAST_COMMIT_MESSAGE" value="add error log message" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/application/models/Log_model.php">

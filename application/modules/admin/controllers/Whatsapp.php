@@ -55,9 +55,18 @@ class Whatsapp extends Admin_Controller {
         $crud->order_by('id','desc');
         $crud->unset_add();
         $crud->unset_delete();
-        $crud->unset_edit();
+//        $crud->unset_edit();
+        //modules/admin/controllers/Whatsapp.php' /Whatsapp application Title Deadline Whatsapp module/admin unset_edit
         $this->mPageTitle = 'Error Logs';
+        $crud->callback_column('message',array($this,'message_callback'));
         $this->render_crud();
+    }
+
+    function message_callback($value, $row)
+    {
+        if (strlen($value) > 70)
+            $str = substr($value, 0, 67) . '...';
+        return "<b>".$str."</b>";
     }
 
     public function received()

@@ -51,3 +51,17 @@ Content-Type: application/json
 }
 
 ###
+###  from Irina to Heino (Whatsapp send)
+
+POST http://www.lomago.io/whatsapp/api/users/billingServer
+Content-Type: application/json
+
+{
+  "text": "api test",
+  "sender_id": 105,
+  "receiver_id": 110,
+  "page_id": "004915155766438",
+  "type": "whatsapp"
+}
+
+###

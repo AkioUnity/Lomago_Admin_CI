@@ -1,3 +1,33 @@
+POST http://www.lomago.io/whatsapp/api/users/billingServer
+Content-Type: application/json
+
+{
+  "text": "api test",
+  "sender_id": 105,
+  "receiver_id": 110,
+  "page_id": "004915155766438",
+  "type": "whatsapp"
+}
+
+<> 2022-01-11T031155.405.json
+
+###
+
+POST https://www.lomago.io/whatsapp/api/users/billingServer
+Content-Type: application/json
+
+{
+  "text": "api test",
+  "sender_id": 105,
+  "receiver_id": 110,
+  "page_id": "004915155766438",
+  "type": "whatsapp"
+}
+
+<> 2022-01-11T031146.200.json
+
+###
+
 POST https://www.lomago.io/whatsapp/api/users/sendMessage
 Content-Type: application/json
 

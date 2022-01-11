@@ -9,6 +9,6 @@ class Errors extends MX_Controller {
 	{
 		$this->output->set_status_header('404');
 		$this->mPageTitle = '404 Page Not Found';
-		$this->render('errors/custom/error_404');
+		return "404 Page Not Found";
 	}
 }

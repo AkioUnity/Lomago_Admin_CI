@@ -54,17 +54,15 @@ class Users extends API_Controller
             $res = "error";
             if ($message['dir'] == 'i') {  //input
 //                $this->dialogflow($send);
-//                $send['to']='8562055442940';
                 $phone = substr($send['to'], 2);
-                $LAMOGA_WAF = $this->getCustomerPhone($phone);
-                if ($LAMOGA_WAF == null)
-                    $LAMOGA_WAF = $this->getConsultantPhone($phone);
+//                $LAMOGA_WAF = $this->getCustomerPhone($phone);  //from consultant to customer
+//                if ($LAMOGA_WAF == null)
+                $LAMOGA_WAF = $this->getConsultantPhone($phone);
                 if ($LAMOGA_WAF != null) {
                     $send['to'] = $LAMOGA_WAF->phone;
                     $send['custom_uid'] = time();
                     $send['uid'] = $this->wa_phone;
-                    $res = $this->send_message($send);
-//                    $send['to']='0049015155766438';
+//                    $res = $this->send_message($send);  // not sending to Consultant whatsapp
                     $res = $this->SendBillingServerWA($send, $LAMOGA_WAF);
 
                     $data['sender_id'] = $LAMOGA_WAF->sender_id;
@@ -398,14 +396,16 @@ class Users extends API_Controller
         $log = array(
             'function' => 'SendBillingServer post',
             'type'=>'data',
-            'message' => json_encode($send)
+            'message' => json_encode($send),
+            'event'=>$send['type']
         );
         $this->db->insert('error_logs', $log);
         $response = json_decode($this->postCURL($url, $data));
         $log = array(
             'function' => 'SendBillingServer response',
             'type'=>'data',
-            'message' => json_encode($response)
+            'message' => json_encode($response),
+            'event'=>$send['type']
         );
         $this->db->insert('error_logs', $log);
         return ($response);
@@ -442,7 +442,6 @@ class Users extends API_Controller
     public function send_message($send)
     {
         $base_url = 'https://www.waboxapp.com/api/send/chat?';
-//        $token="51ed0669bea9c01cf3cf2144cd0049975c7a994025fa9";
         $url = $base_url . "token=" . $send['token'] . "&uid=" . $send['uid'] . "&to=" . $send['to'] . "&custom_uid=" . $send['custom_uid'] . "&text=" . urlencode($send['text']);
         $response = json_decode($this->getCURL($url), true);
 //        $this->response($response);

@@ -65,3 +65,8 @@ Content-Type: application/json
 }
 
 ###
+
+POST https://admin.lomago.io/api/users/messengerpeople
+Content-Type: application/json
+
+###

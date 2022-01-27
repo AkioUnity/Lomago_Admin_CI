@@ -25,6 +25,32 @@ class Users extends API_Controller
         $this->response($data);
     }
 
+    //    https://admin.lomago.io/api/users/messengerpeople    //webhook
+    // http://www.lomago.io/whatsapp/api/users/messengerpeople
+    public function messengerpeople_post()
+    {
+        $payload = $this->post();
+        log_message('error', json_encode($payload));
+        $response = [
+            "success" => true
+        ];
+        if (isset($payload['challenge']) && isset($payload['verification_token'])) {
+            $verification_token = $payload['verification_token'];
+            // If verification code does not match the value set by you, send 403 - forbidden.
+            if ($verification_token !== "lomago_token") {
+                http_response_code(403);
+                log_message('error', "Wrong verification code.");
+                die("Wrong verification code.");
+            }
+
+            // Add challenge to the response.
+            $response['challenge'] = $payload['challenge'];
+        }
+//        http_response_code(200);
+//        echo json_encode($response);
+        $this->response($response);
+    }
+
 //report
     public function hook_post()
     {

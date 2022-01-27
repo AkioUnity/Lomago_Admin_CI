@@ -1,3 +1,45 @@
+POST https://admin.lomago.io/api/users/messengerpeople
+Content-Type: application/json
+
+<> 2022-01-27T004051.200.json
+
+###
+
+POST https://admin.lomago.io/api/users/messengerpeople
+Content-Type: application/json
+
+<> 2022-01-26T235205.200.html
+
+###
+
+POST https://admin.lomago.io/api/users/messengerpeople
+Content-Type: application/json
+
+<> 2022-01-16T151840.200.json
+
+###
+
+POST https://admin.lomago.io/api/users/messengerpeople
+Content-Type: application/json
+
+<> 2022-01-16T151334.200.json
+
+###
+
+POST http://admin.lomago.io/api/users/messengerpeople
+Content-Type: application/json
+
+<> 2022-01-16T151326.405.json
+
+###
+
+POST https://admin.lomago.io/api/users/messengerpeople
+Content-Type: application/json
+
+<> 2022-01-16T151254.200.json
+
+###
+
 POST http://www.lomago.io/whatsapp/api/users/billingServer
 Content-Type: application/json
 

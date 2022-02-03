@@ -1,16 +1,13 @@
 <?php
 /** @noinspection SqlNoDataSourceInspection */
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+include_once (dirname(__FILE__) . "/Whatsapp.php");
 /**
  * Demo Controller with Swagger annotations
  * Reference: https://github.com/zircote/swagger-php/
  */
-class Users extends API_Controller
+class Users extends Whatsapp
 {
-    public $wabox_token = '51ed0669bea9c01cf3cf2144cd0049975c7a994025fa9';
-    public $agent_token = 'a8c3a69806144c45b100f0fd0f06f232';
-    public $wa_phone = '8562092175213';
 
 //    http://www.lomago.io/whatsapp/api/users/sms
     public function sms_post()
@@ -30,7 +27,7 @@ class Users extends API_Controller
     public function messengerpeople_post()
     {
         $payload = $this->post();
-        log_message('error', json_encode($payload));
+//        log_message('error', json_encode($payload));
         $response = [
             "success" => true
         ];
@@ -46,12 +43,48 @@ class Users extends API_Controller
             // Add challenge to the response.
             $response['challenge'] = $payload['challenge'];
         }
-//        http_response_code(200);
-//        echo json_encode($response);
+        // At this point everything is fine, the challenge was set, the secret header was checked and you can process the message.
+        //at this point everything is fine,
+        if (isset($payload['payload'])) {
+            $data = [];
+            $data['phone'] = $payload['sender'];
+            $payload=$payload['payload'];
+            $data['sender_name'] = $payload['user']['name'];
+            $data['time'] = date('Y-m-d H:i:s', $payload['timestamp']);
+            $data['dir'] = 'i';
+            $data['text'] = $payload['text'];
+            $this->processWhatsappMessage($data);
+        }
         $this->response($response);
     }
 
-//report
+    function processWhatsappMessage($data) {
+        $phone = substr($data['phone'], 2);
+//                $LAMOGA_WAF = $this->getCustomerPhone($phone);  //from consultant to customer
+//                if ($LAMOGA_WAF == null)
+        $LAMOGA_WAF = $this->getConsultantPhone($phone);
+        if ($LAMOGA_WAF != null) {
+            $send = [];
+//            $send['token'] = $data['token'];
+            $send['to'] = $LAMOGA_WAF->phone;
+            $send['custom_uid'] = time();
+            $send['uid'] = $this->wa_phone;
+            $send['text'] = $data['text'];
+            $send['name'] = $data['sender_name'];
+            $send['time'] = $data['time'];
+            $send['dir'] = $data['dir'];
+//                    $res = $this->send_message($send);  // not sending to Consultant whatsapp
+            $res = $this->SendBillingServerWA($send, $LAMOGA_WAF);
+            $data['sender_id'] = $LAMOGA_WAF->sender_id;
+            $data['receiver_id'] = $LAMOGA_WAF->receiver_id;
+        }
+        $data['event'] = 'whatsapp';
+        $this->load->model('w_receive_message_model', 'receive_model');
+        $this->receive_model->insert($data);
+        log_message('error', json_encode($res));
+        return $res;
+    }
+
     public function hook_post()
     {
 //        $report_id=$this->post()['report_id'];
@@ -65,122 +98,14 @@ class Users extends API_Controller
         $data['dir'] = $message['dir'];
         $data['text'] = $message['body']['text'];
         if ($data['event'] == "message") {
-            $data['event'] = 'whatsapp';
-            $send = array();
-            $send['token'] = $data['token'];
-            $send['uid'] = $data['uid'];  //connected phone
-            $send['to'] = $data['phone'];  // sender
-            $send['custom_uid'] = $message['uid'];
-            $send['text'] = $data['text'];
-            $send['name'] = $data['sender_name'];
-            $send['time'] = $data['time'];
-            $send['dir'] = $data['dir'];
-
 //            $this->UpdateLHCDb($send);
             $res = "error";
             if ($message['dir'] == 'i') {  //input
 //                $this->dialogflow($send);
-                $phone = substr($send['to'], 2);
-//                $LAMOGA_WAF = $this->getCustomerPhone($phone);  //from consultant to customer
-//                if ($LAMOGA_WAF == null)
-                $LAMOGA_WAF = $this->getConsultantPhone($phone);
-                if ($LAMOGA_WAF != null) {
-                    $send['to'] = $LAMOGA_WAF->phone;
-                    $send['custom_uid'] = time();
-                    $send['uid'] = $this->wa_phone;
-//                    $res = $this->send_message($send);  // not sending to Consultant whatsapp
-                    $res = $this->SendBillingServerWA($send, $LAMOGA_WAF);
-
-                    $data['sender_id'] = $LAMOGA_WAF->sender_id;
-                    $data['receiver_id'] = $LAMOGA_WAF->receiver_id;
-                    $this->load->model('w_receive_message_model', 'receive_model');
-                    $this->receive_model->insert($data);
-                }
+                $res = $this->processWhatsappMessage($data);
             }
-
             $this->response($res);
         }
-    }
-
-    public function UpdateLHCDb($send)
-    {
-        $query = $this->db->query("select id from lh_chat where (hash='" . $send['uid'] . "' and session_referrer='" . $send['to'] . "')");
-        $record = $query->row();
-        $chat_id = 0;
-        if (!$record) {
-            $sql = "insert into lh_chat (nick,hash,session_referrer,time,referrer) values('" . $send['name'] . "','" . $send['uid'] . "','" . $send['to'] . "'," . $send['time'] . ",'//web.whatsapp.com')";
-            $this->db->query($sql);
-            $chat_id = $this->db->insert_id();
-        } else
-            $chat_id = $record->id;
-        $pos = strpos($send['text'], "(ChatID=");
-        if ($pos) {
-            $pos += 8;
-            $web_chat_id = substr($send['text'], $pos, strpos($send['text'], ")", $pos) - $pos);
-            $dataQ = array('chat_id' => $chat_id);
-            $this->db->where('chat_id', $web_chat_id);
-            $this->db->update('lh_msg', $dataQ);
-        }
-
-        $dataQ = array(
-            'msg' => $send['text'],
-            'time' => $send['time'],
-            'chat_id' => $chat_id,
-            'user_id' => ($send['dir'] == 'i') ? 0 : -3,
-            'name_support' => $send['name']
-        );
-        $this->db->insert('lh_msg', $dataQ);
-
-        $msg_id = $this->db->insert_id();
-
-        $dataQ = array(
-            'last_user_msg_time' => $send['time'],
-            'lsync' => $send['time'],
-            'last_msg_id' => $msg_id,
-            'has_unread_messages' => 1,
-            'unanswered_chat' => 1,
-            'remarks' => $send['token'],
-        );
-        $this->db->where('id', $chat_id);
-        $this->db->update('lh_chat', $dataQ);
-
-    }
-
-    public function dialogflow($obj)
-    {
-        $base_url = 'https://api.dialogflow.com/v1/';
-        $version_date = '20170712'; //'20170712';
-        $language = 'en';
-        $session_id = 'somerandomthing';
-        $url = $base_url . "query?v=" . $version_date;
-        $data = array('query' => $obj['text'], 'lang' => $language, 'sessionId' => $session_id);
-
-        $query = $this->db->query("select dialogflow_token,disable from w_dialogflows where phone='8562092175213'");
-        $record = $query->row();
-
-//        $this->load->model('w_dialogflow_model', 'agent');
-//        $dialogflowToken = $this->agent->get(1);
-
-//        $access_token='e5e28e0f35b845378ada5ef3edb49e57';  //dialogflowToken
-        //'';//
-        if ($record->disable)  //bot disable
-            return;
-        $access_token = $record->dialogflow_token;
-
-        $response = json_decode($this->postCURL($url, $data, $access_token), true);
-        $fulfillment = $response['result']['fulfillment'];
-        $messages = $fulfillment['messages'];
-        $res = "";
-        for ($x = 0; $x < count($messages); $x++) {
-            $message = $messages[$x];
-            if ($message['type'] == 0) {
-                $res = $res . $message['speech'];
-                $obj['text'] = $message['speech'];
-                $this->send_message($obj);
-                //        $this->response($obj);
-            }
-        }
-//        $this->response($obj);
     }
 
     public function wp_post()
@@ -193,7 +118,8 @@ class Users extends API_Controller
         $send['uid'] = $this->wa_phone;
         $send['custom_uid'] = time();
         $send['text'] = str_replace('$username', $send['username'], $steps->message);
-        $send['text'] = str_replace('$price', $send['price'], $send['text']);
+        if (isset($send['price']))
+            $send['text'] = str_replace('$price', $send['price'], $send['text']);
         $res = $this->send_message($send);
 //        sleep(5);
 //        $send['custom_uid']=time()."10";
@@ -463,35 +389,5 @@ class Users extends API_Controller
             return $res;
         }
         return null;
-    }
-
-    public function send_message($send)
-    {
-        $base_url = 'https://www.waboxapp.com/api/send/chat?';
-        $url = $base_url . "token=" . $send['token'] . "&uid=" . $send['uid'] . "&to=" . $send['to'] . "&custom_uid=" . $send['custom_uid'] . "&text=" . urlencode($send['text']);
-        $response = json_decode($this->getCURL($url), true);
-//        $this->response($response);
-//        $this->response($url);
-        return ($response);
-    }
-
-
-    public function getCURL($_url)
-    {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $_url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-//        curl_setopt($ch, CURLOPT_HEADER, false);
-//        curl_setopt($ch, CURLOPT_POST, count($postData));
-
-        $output = curl_exec($ch);
-        curl_close($ch);
-        return $output;
-    }
-
-    public function dialogflow_post()
-    {
-        $message = $this->post();
-        $this->dialogflow($message);
     }
 }

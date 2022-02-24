@@ -5,6 +5,13 @@ class Whatsapp extends API_Controller
     public $isWabox = false;
     public $wabox_token = '51ed0669bea9c01cf3cf2144cd0049975c7a994025fa9';
     public $wa_phone = '8562092175213';
+
+    //https://admin.lomago.io/api/whatsapp/sendMessage
+    public function sendMessage_get(){
+        $result= $this->sendWhatsappMessage_get($this->get('text','test_message'),$this->get('phone','8562092175213'));
+        echo $result;
+    }
+
 //https://admin.lomago.io/api/whatsapp/sendWhatsappMessage
     public function sendWhatsappMessage_get($message = "Hello World",$recipient = "8562092175213")
     {
@@ -17,6 +24,8 @@ class Whatsapp extends API_Controller
 
         $channel_uuid = "ceccf9cc-d02c-4140-90e6-7f76ddde279d"; // Put the UUID of your channel here
         $curl = curl_init();
+
+        $recipient=str_replace("0049","49",$recipient);
 
         $payload = [
             "sender" => $channel_uuid,

@@ -74,7 +74,8 @@ class Users extends Whatsapp
             $send['time'] = $data['time'];
             $send['dir'] = $data['dir'];
 //                    $res = $this->send_message($send);  // not sending to Consultant whatsapp
-            $res = $this->SendBillingServerWA($send, $LAMOGA_WAF);
+            if ($LAMOGA_WAF->status==1)
+                $res = $this->SendBillingServerWA($send, $LAMOGA_WAF);
             $data['sender_id'] = $LAMOGA_WAF->sender_id;
             $data['receiver_id'] = $LAMOGA_WAF->receiver_id;
         }
@@ -185,11 +186,9 @@ class Users extends Whatsapp
     public function getConsultantPhone($phone)
     {
         $wpDb = $this->load->database('lamoga', TRUE);
-        $query = $wpDb->select('id,consultant_phone,sbid,user_id as sender_id,consultant_id as receiver_id')->like('customer_phone', $phone)->from('LAMOGA_WAF_request'.$this->wa_portal_id)->get();
+        $query = $wpDb->select('id,consultant_phone as phone,sbid,user_id as sender_id,consultant_id as receiver_id,status')->like('customer_phone', $phone)->from('LAMOGA_WAF_request'.$this->wa_portal_id)->get();
         if ($query->num_rows() > 0) {
-            $res = $query->row();
-            $res->phone = $res->consultant_phone;
-            return $res;
+            return $query->row();
         }
         return null;
     }

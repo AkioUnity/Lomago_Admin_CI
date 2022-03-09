@@ -25,6 +25,7 @@ class Whatsapp extends API_Controller
         $channel_uuid = "ceccf9cc-d02c-4140-90e6-7f76ddde279d"; // Put the UUID of your channel here
         $curl = curl_init();
 
+        $recipient=str_replace("00490","49",$recipient);
         $recipient=str_replace("0049","49",$recipient);
 
         $payload = [

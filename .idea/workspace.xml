@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="change whatsapp api">
+    <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="change whatsapp api and remove 00 from phone">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/modules/admin/controllers/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/admin/controllers/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/modules/api/controllers/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/api/controllers/Users.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/modules/api/controllers/Whatsapp.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/api/controllers/Whatsapp.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -1109,7 +1109,12 @@
       <workItem from="1644657507072" duration="2609000" />
       <workItem from="1644987874312" duration="3481000" />
       <workItem from="1645003909578" duration="1285000" />
-      <workItem from="1645690205935" duration="778000" />
+      <workItem from="1645690205935" duration="2332000" />
+      <workItem from="1645823143720" duration="630000" />
+      <workItem from="1645860596057" duration="532000" />
+      <workItem from="1645866289317" duration="759000" />
+      <workItem from="1646040379460" duration="678000" />
+      <workItem from="1646125072668" duration="1245000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1592222335495</created>
@@ -1251,7 +1256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643932100258</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="change whatsapp api and remove 00 from phone">
+      <created>1645691012189</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1645691012189</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1332,7 +1344,8 @@
     <MESSAGE value="add chatbot history" />
     <MESSAGE value="add webhook" />
     <MESSAGE value="change whatsapp api" />
-    <option name="LAST_COMMIT_MESSAGE" value="change whatsapp api" />
+    <MESSAGE value="change whatsapp api and remove 00 from phone" />
+    <option name="LAST_COMMIT_MESSAGE" value="change whatsapp api and remove 00 from phone" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/application/models/Log_model.php">

@@ -74,8 +74,16 @@ class Users extends Whatsapp
             $send['time'] = $data['time'];
             $send['dir'] = $data['dir'];
 //                    $res = $this->send_message($send);  // not sending to Consultant whatsapp
-            if ($LAMOGA_WAF->status==1)
+            if ($LAMOGA_WAF->status==1) //connected
                 $res = $this->SendBillingServerWA($send, $LAMOGA_WAF);
+            else if ($LAMOGA_WAF->status==0){ //waiting{
+                $wpDb = $this->load->database('lamoga', TRUE);
+                $query = $wpDb->select('text')->where('name', 'whatsapp_first_reply')->from('auto_messages'.$this->wa_portal_id)->get();
+                $replayText = $query->row()->text;
+                $replayText = str_replace('$customer', $data['sender_name'], $replayText);
+                $this->sendWhatsappMessage_get($replayText,$data['phone']);
+            }
+
             $data['sender_id'] = $LAMOGA_WAF->sender_id;
             $data['receiver_id'] = $LAMOGA_WAF->receiver_id;
         }

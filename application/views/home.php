@@ -1,6 +1,9 @@
 
 <div class="container">
     <button class="btn btn-danger" onclick="show();">Click</button>
+    <div style="text-align: center;display: none" id="showPhone">
+        <img src="<?=image_url('phone.jpg') ?>" width="40%">
+    </div>
 
     <div id="myModal" class="modal fade">
         <div class="modal-dialog">
@@ -31,8 +34,11 @@
             fetch(apiUrl)
                 .then(response=>response.json())
                 .then(data=>{
-                    if (data.status=='closed')
+                    if (data.status=='closed'){
                         $('#myModal').modal('hide');
+                        $('#showPhone').show();
+                    }
+
                     console.log(data);
                 })
         }

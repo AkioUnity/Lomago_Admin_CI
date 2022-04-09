@@ -2,10 +2,7 @@
 /** @noinspection SqlNoDataSourceInspection */
 defined('BASEPATH') OR exit('No direct script access allowed');
 include_once (dirname(__FILE__) . "/Whatsapp.php");
-/**
- * Demo Controller with Swagger annotations
- * Reference: https://github.com/zircote/swagger-php/
- */
+
 class Users extends Whatsapp
 {
 

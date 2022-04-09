@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config['ci_bootstrap'] = array(
 
 	// Site name
-	'site_name' => 'CI Bootstrap 3',
+	'site_name' => 'Lomago Service',
 
 	// Default page title prefix
 	'page_title_prefix' => '',
@@ -32,8 +32,11 @@ $config['ci_bootstrap'] = array(
 
 	// Default scripts to embed at page head or end
 	'scripts' => array(
-		'head'	=> array(
-		),
+        'head'	=> array(
+            'assets/dist/admin/adminlte.min.js',
+            'assets/dist/admin/lib.min.js',
+            'assets/dist/admin/app.min.js'
+        ),
 		'foot'	=> array(
 			'assets/dist/frontend/lib.min.js',
 			'assets/dist/frontend/app.min.js'
@@ -44,7 +47,11 @@ $config['ci_bootstrap'] = array(
 	'stylesheets' => array(
 		'screen' => array(
 			'assets/dist/frontend/lib.min.css',
-			'assets/dist/frontend/app.min.css'
+			'assets/dist/frontend/app.min.css',
+            'assets/dist/admin/adminlte.min.css',
+			'assets/dist/admin/lib.min.css',
+			'assets/dist/admin/app.min.css',
+            'assets/custom.css',
 		)
 	),
 
@@ -59,10 +66,6 @@ $config['ci_bootstrap'] = array(
 			'en' => array(
 				'label'	=> 'English',
 				'value'	=> 'english'
-			),
-			'zh' => array(
-				'label'	=> '繁體中文',
-				'value'	=> 'traditional-chinese'
 			),
 			'cn' => array(
 				'label'	=> '简体中文',

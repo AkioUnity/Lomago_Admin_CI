@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="change whatsapp api and remove 00 from phone">
+    <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="add first reply whatsapp message">
+      <change afterPath="$PROJECT_DIR$/application/modules/api/controllers/Modal.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/dist/images/popup.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/dist/images/qr.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/config/ci_bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/config/ci_bootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/config/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/config/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Home.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Home.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/modules/api/controllers/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/api/controllers/Users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/home.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,6 +170,9 @@
     <option name="height" value="456" />
   </component>
   <component name="ProjectId" id="1uzBjyFOoiuO4ZCJ3Z4WuFsmKjO" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <autoscrollFromSource ProjectPane="true" />
@@ -1116,7 +1126,10 @@
       <workItem from="1646125072668" duration="1245000" />
       <workItem from="1646854399268" duration="10098000" />
       <workItem from="1647537289333" duration="1272000" />
-      <workItem from="1647549236713" duration="1958000" />
+      <workItem from="1647549236713" duration="2078000" />
+      <workItem from="1649412470876" duration="1502000" />
+      <workItem from="1649481455461" duration="7191000" />
+      <workItem from="1649495118685" duration="4606000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1592222335495</created>
@@ -1272,7 +1285,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646854421445</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="add first reply whatsapp message">
+      <created>1647551323475</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1647551323475</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1354,7 +1374,8 @@
     <MESSAGE value="add webhook" />
     <MESSAGE value="change whatsapp api" />
     <MESSAGE value="change whatsapp api and remove 00 from phone" />
-    <option name="LAST_COMMIT_MESSAGE" value="change whatsapp api and remove 00 from phone" />
+    <MESSAGE value="add first reply whatsapp message" />
+    <option name="LAST_COMMIT_MESSAGE" value="add first reply whatsapp message" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/application/models/Log_model.php">

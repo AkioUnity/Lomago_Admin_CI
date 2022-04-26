@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="modal complete">
-      <change afterPath="$PROJECT_DIR$/assets/dist/images/phone.jpg" afterDir="false" />
+    <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="add phone show image">
+      <change afterPath="$PROJECT_DIR$/assets/dist/images/phone_show.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/home.php" afterDir="false" />
     </list>
@@ -1123,7 +1123,10 @@
       <workItem from="1647549236713" duration="2078000" />
       <workItem from="1649412470876" duration="1502000" />
       <workItem from="1649481455461" duration="7191000" />
-      <workItem from="1649495118685" duration="6775000" />
+      <workItem from="1649495118685" duration="6793000" />
+      <workItem from="1649513636563" duration="148000" />
+      <workItem from="1649520868581" duration="1757000" />
+      <workItem from="1649695876205" duration="594000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1592222335495</created>
@@ -1293,7 +1296,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649505313444</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="add phone show image">
+      <created>1649511216685</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1649511216685</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1377,7 +1387,8 @@
     <MESSAGE value="change whatsapp api and remove 00 from phone" />
     <MESSAGE value="add first reply whatsapp message" />
     <MESSAGE value="modal complete" />
-    <option name="LAST_COMMIT_MESSAGE" value="modal complete" />
+    <MESSAGE value="add phone show image" />
+    <option name="LAST_COMMIT_MESSAGE" value="add phone show image" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/application/models/Log_model.php">

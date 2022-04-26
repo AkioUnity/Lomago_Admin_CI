@@ -1,8 +1,8 @@
 
 <div class="container">
     <button class="btn btn-danger" onclick="show();">Click</button>
-    <div style="text-align: center;display: none" id="showPhone">
-        <img src="<?=image_url('phone.jpg') ?>" width="40%">
+    <div style="text-align: center;" id="showPhone">
+        <img src="<?=image_url('phone_show.jpg') ?>" width="100%">
     </div>
 
     <div id="myModal" class="modal fade">
@@ -19,7 +19,13 @@
         </div>
     </div>
 </div>
+<style>
+    #showPhone {display: none;}
 
+    @media screen and (max-width: 768px) {
+        #showPhone {display: block;}
+    }
+</style>
 <script>
     let apiUrl='<?=base_url('api/modal');?>';
     function show(){
@@ -36,7 +42,7 @@
                 .then(data=>{
                     if (data.status=='closed'){
                         $('#myModal').modal('hide');
-                        $('#showPhone').show();
+                        // $('#showPhone').show();
                     }
 
                     console.log(data);

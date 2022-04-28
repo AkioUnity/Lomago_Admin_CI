@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="add phone show image">
-      <change afterPath="$PROJECT_DIR$/assets/dist/images/phone_show.jpg" afterDir="false" />
+    <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="auto close popup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/modules/api/controllers/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/api/controllers/Users.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1127,6 +1126,9 @@
       <workItem from="1649513636563" duration="148000" />
       <workItem from="1649520868581" duration="1757000" />
       <workItem from="1649695876205" duration="594000" />
+      <workItem from="1650967634828" duration="2293000" />
+      <workItem from="1651037120368" duration="3740000" />
+      <workItem from="1651141105548" duration="10228000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1592222335495</created>
@@ -1303,7 +1305,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649511216685</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="auto close popup">
+      <created>1650967747600</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1650967747600</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1388,7 +1397,8 @@
     <MESSAGE value="add first reply whatsapp message" />
     <MESSAGE value="modal complete" />
     <MESSAGE value="add phone show image" />
-    <option name="LAST_COMMIT_MESSAGE" value="add phone show image" />
+    <MESSAGE value="auto close popup" />
+    <option name="LAST_COMMIT_MESSAGE" value="auto close popup" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/application/models/Log_model.php">

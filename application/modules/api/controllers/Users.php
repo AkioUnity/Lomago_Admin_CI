@@ -214,7 +214,7 @@ class Users extends Whatsapp
 
     //https://www.lomago.io/whatsapp/api/users/send
     // for Gerd  from webchat
-    public function send_post()
+    public function send_post()  // receive the message from Webchat
     {
         $data = $this->post();
         $service_id=$data['service_id'];
@@ -243,13 +243,12 @@ class Users extends Whatsapp
             unset($send['to']);
             unset($send['custom_uid']);
         }
-        else {
+        else {  //if facebook or telegram,  it should send message to node.js project.
             if ($service_id=='FB')
                 $type="facebook";
             else
                 $type="telegram";
-            $url = 'https://www.lomago.io:1337/send?';
-            $url = $url . "page_id=" . $data['phone'] . "&text=" . urlencode($data['text']) . "&type=".$type;
+            $res = $this->SendMessageToNode($data['phone'],$data['text'],$type);
             $log = array(
                 'function' => 'send_post',
                 'type' => 'data',
@@ -257,9 +256,6 @@ class Users extends Whatsapp
                 'message' => json_encode($data)
             );
             $this->db->insert('error_logs', $log);
-            $log['message']=$url;
-            $this->db->insert('error_logs', $log);
-            $res = json_decode($this->getCURL($url), true);
             $send['event'] = $type;
         }
         $send['sender_id']=$consultant_id;
@@ -340,7 +336,7 @@ class Users extends Whatsapp
     {
         $url = 'https://www.audiotex-0900.de/whatsapp/whatsapp_send.php/?';
         $data = array(
-            'phone' => $send['to'],
+            'phone' => $send['to'],  //receiver_id or phone number (consultant_id)
             'direction' => $send['dir'],
             'text' => urlencode($send['text'])
         , 'price' => 120, 'url' => 'lamoga.de', 'client_id' => $send['sender_id']
@@ -364,6 +360,7 @@ class Users extends Whatsapp
             'event'=>$send['type']
         );
         $this->db->insert('error_logs', $log);
+        $this->SendNotificationToNode($send['to'],$send['sender_id'],$send['text']);
         return ($response);
     }
 
@@ -376,7 +373,7 @@ class Users extends Whatsapp
         $LAMOGA_WAF = $this->getLAMOGA_WAF($send);
         $send['type']=($send['type']=='facebook')?"FB":"TG";
 
-        $send['to']=$send['receiver_id'];
+        $send['to']=$send['receiver_id'];  //consultant_id
         $send['dir']=($send['sender_id']==$LAMOGA_WAF->user_id)?'i':'o';
         $res = $this->SendBillingServer($send, $LAMOGA_WAF);
         $this->response($res);
@@ -393,5 +390,25 @@ class Users extends Whatsapp
             return $res;
         }
         return null;
+    }
+
+    public function SendMessageToNode($page_id,$text,$type){
+        $url = 'https://www.lomago.io:1337/send?';
+        $url = $url . "page_id=" . $page_id . "&text=" . urlencode($text) . "&type=".$type;
+        return json_decode($this->getCURL($url), true);
+    }
+
+    public function SendNotificationToNode($consultant_id,$customer_id,$text){
+        $wpDb = $this->load->database('lamoga', TRUE);
+        $telegram = $wpDb->select('chat_id')->where('user_id',$consultant_id)->from('telegram_contacts')->get()->row();
+        if (isset($telegram) && !(empty($telegram->chat_id))){
+            $customerName = $wpDb->select('user_login')->where('ID', $customer_id)->from('pts_useradressen'.$this->wa_portal_id)->get()->row()->user_login;
+            $consultantName = $wpDb->select('bezeichnung')->where('ID', $consultant_id)->from('pts_berater_profile'.$this->wa_portal_id)->get()->row()->bezeichnung;
+            $text="Hello ".$consultantName.", you have a new message  on LAMOGA from ".$customerName;
+//https://www.lomago.io:1337/send_telegram?text=telegram&page_id=3357824640
+            $url = 'https://www.lomago.io:1337/send_telegram?';
+            $url = $url . "page_id=" . $telegram->chat_id . "&text=" . urlencode($text);
+            return json_decode($this->getCURL($url), true);
+        }
     }
 }

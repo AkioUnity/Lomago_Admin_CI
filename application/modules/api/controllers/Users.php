@@ -61,18 +61,18 @@ class Users extends Whatsapp
 //                if ($LAMOGA_WAF == null)
         $LAMOGA_WAF = $this->getConsultantPhone($phone);
         if ($LAMOGA_WAF != null) {
-            $send = [];
-//            $send['token'] = $data['token'];
-            $send['to'] = $LAMOGA_WAF->phone;
-            $send['custom_uid'] = time();
-            $send['uid'] = $this->wa_phone;
-            $send['text'] = $data['text'];
-            $send['name'] = $data['sender_name'];
-            $send['time'] = $data['time'];
-            $send['dir'] = $data['dir'];
+            $data['sender_id'] = $LAMOGA_WAF->sender_id;
+            $data['receiver_id'] = $LAMOGA_WAF->receiver_id;
 //                    $res = $this->send_message($send);  // not sending to Consultant whatsapp
-            if ($LAMOGA_WAF->status==1) //connected
-                $res = $this->SendBillingServerWA($send, $LAMOGA_WAF);
+            if ($LAMOGA_WAF->status==1) { //connected
+                $send = [];
+                $send['sender_id'] = $data['sender_id'];
+                $send['receiver_id'] = $data['receiver_id'];
+                $send['text'] = $data['text'];
+                $send['dir'] = $data['dir']; //i
+                $send['type']="WA";
+                $this->SendBillingServer($send, $LAMOGA_WAF);
+            }
             else if ($LAMOGA_WAF->status==0){ //waiting{
                 $wpDb = $this->load->database('lamoga', TRUE);
                 $query = $wpDb->select('text')->where('name', 'whatsapp_first_reply')->from('auto_messages'.$this->wa_portal_id)->get();
@@ -80,38 +80,10 @@ class Users extends Whatsapp
                 $replayText = str_replace('$customer', $data['sender_name'], $replayText);
                 $this->sendWhatsappMessage_get($replayText,$data['phone']);
             }
-
-            $data['sender_id'] = $LAMOGA_WAF->sender_id;
-            $data['receiver_id'] = $LAMOGA_WAF->receiver_id;
         }
         $data['event'] = 'whatsapp';
         $this->load->model('w_receive_message_model', 'receive_model');
         $this->receive_model->insert($data);
-        log_message('error', json_encode($res));
-        return $res;
-    }
-
-    public function hook_post()
-    {
-//        $report_id=$this->post()['report_id'];
-        $data = elements(array('event', 'token', 'uid', 'ack'), $this->post());
-
-        $contact = $this->post()['contact'];
-        $data['phone'] = $contact['uid'];
-        $data['sender_name'] = $contact['name'];
-        $message = $this->post()['message'];
-        $data['time'] = date('Y-m-d H:i:s', $message['dtm']);
-        $data['dir'] = $message['dir'];
-        $data['text'] = $message['body']['text'];
-        if ($data['event'] == "message") {
-//            $this->UpdateLHCDb($send);
-            $res = "error";
-            if ($message['dir'] == 'i') {  //input
-//                $this->dialogflow($send);
-                $res = $this->processWhatsappMessage($data);
-            }
-            $this->response($res);
-        }
     }
 
     public function wp_post()
@@ -191,7 +163,7 @@ class Users extends Whatsapp
     public function getConsultantPhone($phone)
     {
         $wpDb = $this->load->database('lamoga', TRUE);
-        $query = $wpDb->select('id,consultant_phone as phone,sbid,user_id as sender_id,consultant_id as receiver_id,status')->like('customer_phone', $phone)->from('LAMOGA_WAF_request'.$this->wa_portal_id)->get();
+        $query = $wpDb->select('id,sbid,user_id as sender_id,consultant_id as receiver_id,status')->like('customer_phone', $phone)->from('LAMOGA_WAF_request'.$this->wa_portal_id)->get();
         if ($query->num_rows() > 0) {
             return $query->row();
         }
@@ -268,79 +240,15 @@ class Users extends Whatsapp
         $this->response($res);
     }
 
-//https://www.lomago.io/whatsapp/api/users/sendMessage
-    public function sendMessage_post()  //sender_id, text ,receiver_id
-    {
-        $send = $this->post();
-        $wpDb = $this->load->database('lamoga', TRUE);
-        $query = $wpDb->select('customer_phone,status')->where('user_id', $send['receiver_id'])->from('LAMOGA_WAF_request'.$this->wa_portal_id)->get();
-        $res = $query->row();
-        $send['event'] = 'whatsapp';
-        $send['token'] = $this->wabox_token;
-        $send['uid'] = $this->wa_phone;
-        $send['to'] = $res->customer_phone;
-        $send['custom_uid'] = time();
-        $res = $this->send_message($send);
-
-        $data = array(
-            'to' => $send['to'],
-            'dir' => 'o',
-            'text' => $send['text']
-        );
-
-        $phone = substr($send['to'], 2);
-
-        unset($send['to']);
-        unset($send['custom_uid']);
-        unset($send['page_id']);
-        unset($send['type']);
-
-        $send['time'] = date('Y-m-d H:i:s', time());
-        $this->load->model('w_receive_message_model', 'receive_model');
-        $this->receive_model->insert($send);
-
-
-        $LAMOGA_WAF = $this->getCustomerPhone($phone);
-        if ($LAMOGA_WAF == null)
-            $LAMOGA_WAF = $this->getConsultantPhone($phone);
-        if ($LAMOGA_WAF != null) {
-            $data['to'] = $LAMOGA_WAF->phone;
-            $res = $this->SendBillingServerWA($data, $LAMOGA_WAF);
-        }
-
-        $this->response($res);
-    }
-
-    public function SendBillingServerWA($send, $LAMOGA_WAF)
-    {
-        $user = $this->getWpUser($send['to']);
-        $response = "Error";
-        if ($user == null) {
-            $user = $this->getWpConsultant($send['to']);
-        }
-        if ($user != null) {
-            $send['type']="WA";
-            $send['sender_id']=$user->ID;
-            return $this->SendBillingServer($send, $LAMOGA_WAF);
-        } else{
-            $log = array(
-                'function' => 'SendBillingServerWA',
-                'message' => $send['to'] . ' not find ' . json_encode($send)
-            );
-            $this->db->insert('error_logs', $log);
-        }
-        return ($response);
-    }
-
     public function SendBillingServer($send, $LAMOGA_WAF)
     {
         $url = 'https://www.audiotex-0900.de/whatsapp/whatsapp_send.php/?';
         $data = array(
-            'phone' => $send['to'],  //receiver_id or phone number (consultant_id)
+            'phone' => $send['receiver_id'],  //receiver_id or phone number (consultant_id)
             'direction' => $send['dir'],
             'text' => urlencode($send['text'])
         , 'price' => 120, 'url' => 'lamoga.de', 'client_id' => $send['sender_id']
-        , 'auth' => "3d7fhezeTuZfkiedopdWq-12\$S", 'hash' => md5("lamoga.de" . $send['to'])
+        , 'auth' => "3d7fhezeTuZfkiedopdWq-12\$S", 'hash' => md5("lamoga.de" . $send['receiver_id'])
         , 'timestamp' => time()
         , 'dialog_id' => $LAMOGA_WAF->id, 'profil_id' => $LAMOGA_WAF->sbid
         , 'service_id' => $send['type']
@@ -360,7 +268,7 @@ class Users extends Whatsapp
             'event'=>$send['type']
         );
         $this->db->insert('error_logs', $log);
-        $this->SendNotificationToNode($send['to'],$send['sender_id'],$send['text']);
+        $this->SendNotificationToNode($send['receiver_id'],$send['sender_id'],$send['text']);
         return ($response);
     }
 
@@ -373,7 +281,6 @@ class Users extends Whatsapp
         $LAMOGA_WAF = $this->getLAMOGA_WAF($send);
         $send['type']=($send['type']=='facebook')?"FB":"TG";
 
-        $send['to']=$send['receiver_id'];  //consultant_id
         $send['dir']=($send['sender_id']==$LAMOGA_WAF->user_id)?'i':'o';
         $res = $this->SendBillingServer($send, $LAMOGA_WAF);
         $this->response($res);
@@ -411,4 +318,73 @@ class Users extends Whatsapp
             return json_decode($this->getCURL($url), true);
         }
     }
+
+
+    // is it used? maybe from mobile app?
+//https://www.lomago.io/whatsapp/api/users/sendMessage
+    public function sendMessage_post()  //sender_id, text ,receiver_id
+    {
+        $send = $this->post();
+        $wpDb = $this->load->database('lamoga', TRUE);
+        $query = $wpDb->select('customer_phone,status')->where('user_id', $send['receiver_id'])->from('LAMOGA_WAF_request'.$this->wa_portal_id)->get();
+        $res = $query->row();
+        $send['event'] = 'whatsapp';
+        $send['token'] = $this->wabox_token;
+        $send['uid'] = $this->wa_phone;
+        $send['to'] = $res->customer_phone;
+        $send['custom_uid'] = time();
+        $res = $this->send_message($send);
+
+        $data = array(
+            'to' => $send['to'],
+            'dir' => 'o',
+            'text' => $send['text']
+        );
+
+        $phone = substr($send['to'], 2);
+
+        unset($send['to']);
+        unset($send['custom_uid']);
+        unset($send['page_id']);
+        unset($send['type']);
+
+        $send['time'] = date('Y-m-d H:i:s', time());
+        $this->load->model('w_receive_message_model', 'receive_model');
+        $this->receive_model->insert($send);
+
+
+        $LAMOGA_WAF = $this->getCustomerPhone($phone);
+        if ($LAMOGA_WAF == null)
+//            $LAMOGA_WAF = $this->getConsultantPhone($phone);
+            if ($LAMOGA_WAF != null) {
+                $data['to'] = $LAMOGA_WAF->phone;
+//            $res = $this->SendBillingServerWA($data, $LAMOGA_WAF);
+            }
+
+        $this->response($res);
+    }
+
+    // is it used?
+    public function hook_post()
+    {
+//        $report_id=$this->post()['report_id'];
+        $data = elements(array('event', 'token', 'uid', 'ack'), $this->post());
+
+        $contact = $this->post()['contact'];
+        $data['phone'] = $contact['uid'];
+        $data['sender_name'] = $contact['name'];
+        $message = $this->post()['message'];
+        $data['time'] = date('Y-m-d H:i:s', $message['dtm']);
+        $data['dir'] = $message['dir'];
+        $data['text'] = $message['body']['text'];
+        if ($data['event'] == "message") {
+//            $this->UpdateLHCDb($send);
+            if ($message['dir'] == 'i') {  //input
+//                $this->dialogflow($send);
+                $this->processWhatsappMessage($data);
+            }
+            $this->response("OK");
+        }
+    }
+
 }

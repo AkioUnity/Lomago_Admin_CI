@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="add telegram notification">
+    <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="disable old whatsapp sdk">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/modules/api/controllers/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/api/controllers/Users.php" afterDir="false" />
     </list>
@@ -1129,7 +1129,9 @@
       <workItem from="1650967634828" duration="2293000" />
       <workItem from="1651037120368" duration="3740000" />
       <workItem from="1651141105548" duration="10256000" />
-      <workItem from="1651221941889" duration="2364000" />
+      <workItem from="1651221941889" duration="3242000" />
+      <workItem from="1651225900242" duration="349000" />
+      <workItem from="1651301693007" duration="5100000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1592222335495</created>
@@ -1320,7 +1322,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651180442770</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="disable old whatsapp sdk">
+      <created>1651224611220</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1651224611220</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1409,7 +1418,8 @@
     <MESSAGE value="add phone show image" />
     <MESSAGE value="auto close popup" />
     <MESSAGE value="add telegram notification" />
-    <option name="LAST_COMMIT_MESSAGE" value="add telegram notification" />
+    <MESSAGE value="disable old whatsapp sdk" />
+    <option name="LAST_COMMIT_MESSAGE" value="disable old whatsapp sdk" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/application/models/Log_model.php">

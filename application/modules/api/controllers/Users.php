@@ -73,12 +73,14 @@ class Users extends Whatsapp
                 $send['type']="WA";
                 $this->SendBillingServer($send, $LAMOGA_WAF);
             }
-            else if ($LAMOGA_WAF->status==0){ //waiting{
+            else if ($LAMOGA_WAF->status==0){ //waiting  // send telegram notification
                 $wpDb = $this->load->database('lamoga', TRUE);
                 $query = $wpDb->select('text')->where('name', 'whatsapp_first_reply')->from('auto_messages'.$this->wa_portal_id)->get();
                 $replayText = $query->row()->text;
                 $replayText = str_replace('$customer', $data['sender_name'], $replayText);
                 $this->sendWhatsappMessage_get($replayText,$data['phone']);
+
+                $this->SendNotificationToNode($data['receiver_id'],$data['sender_id']);
             }
         }
         $data['event'] = 'whatsapp';
@@ -286,6 +288,13 @@ class Users extends Whatsapp
         $this->response($res);
     }
 
+    public function telegramNotification_post()  //from facebook,telegram of node.js
+    {
+        $send = $this->post();
+        $this->SendNotificationToNode($send['consultant_id'],$send['customer_id']);
+        $this->response("OK");
+    }
+
     public function getLAMOGA_WAF($send)  //to get facebook info
     {
         $wpDb = $this->load->database('lamoga', TRUE);
@@ -305,13 +314,14 @@ class Users extends Whatsapp
         return json_decode($this->getCURL($url), true);
     }
 
-    public function SendNotificationToNode($consultant_id,$customer_id,$text){
+    public function SendNotificationToNode($consultant_id,$customer_id,$text='request'){
         $wpDb = $this->load->database('lamoga', TRUE);
         $telegram = $wpDb->select('chat_id')->where('user_id',$consultant_id)->from('telegram_contacts')->get()->row();
         if (isset($telegram) && !(empty($telegram->chat_id))){
             $customerName = $wpDb->select('user_login')->where('ID', $customer_id)->from('pts_useradressen'.$this->wa_portal_id)->get()->row()->user_login;
             $consultantName = $wpDb->select('bezeichnung')->where('ID', $consultant_id)->from('pts_berater_profile'.$this->wa_portal_id)->get()->row()->bezeichnung;
-            $text="Hello ".$consultantName.", you have a new message  on LAMOGA from ".$customerName;
+            $message=($text=='request')?'request':'message';
+            $text="Hello ".$consultantName.", you have a new ".$message." on LAMOGA from ".$customerName;
 //https://www.lomago.io:1337/send_telegram?text=telegram&page_id=3357824640
             $url = 'https://www.lomago.io:1337/send_telegram?';
             $url = $url . "page_id=" . $telegram->chat_id . "&text=" . urlencode($text);

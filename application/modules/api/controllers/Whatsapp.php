@@ -68,6 +68,12 @@ class Whatsapp extends API_Controller
         }
         return ($response);
     }
+//https://admin.lomago.io/api/whatsapp/test/url
+    public function test_get()
+    {
+        $response = $this->getCURL('https://api-info-act.keno.com.au/v2/games/kds?jurisdiction=ACT');
+        print_r($response);
+    }
 
 
     public function getCURL($_url)

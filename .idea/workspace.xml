@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="disable old whatsapp sdk">
+    <list default="true" id="6452dab2-3e58-46c7-83aa-f7d82f028c35" name="Default" comment="notification">
+      <change afterPath="$PROJECT_DIR$/application/views/qr_connect.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Home.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/modules/admin/config/ci_bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/admin/config/ci_bootstrap.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/modules/api/controllers/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/api/controllers/Users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/modules/api/controllers/Whatsapp.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/modules/api/controllers/Whatsapp.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -656,7 +660,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/application/modules/api/controllers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/application/views" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -666,11 +670,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\work\Lomago\Lomago_Admin_CI\application\views" />
       <recent name="E:\work\Lomago\Lomago_Admin_CI\application\modules\api\controllers" />
       <recent name="E:\work\Lomago\Lomago_Admin_CI\application\models" />
       <recent name="E:\work\Lomago\Lomago_Admin_CI\application\modules\admin\controllers" />
       <recent name="E:\work\Lomago\Lomago_Admin_CI\application\modules\admin\views" />
-      <recent name="D:\Bitnami\apache2\htdocs\ci-whatsapp\application\modules\admin\views\lamoga" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\work\Lomago\Lomago_Admin_CI\assets\dist\images" />
@@ -1131,7 +1135,14 @@
       <workItem from="1651141105548" duration="10256000" />
       <workItem from="1651221941889" duration="3242000" />
       <workItem from="1651225900242" duration="349000" />
-      <workItem from="1651301693007" duration="5100000" />
+      <workItem from="1651301693007" duration="5111000" />
+      <workItem from="1652601998156" duration="8312000" />
+      <workItem from="1652774402883" duration="5580000" />
+      <workItem from="1653131361854" duration="381000" />
+      <workItem from="1653168815893" duration="59000" />
+      <workItem from="1653299284634" duration="2688000" />
+      <workItem from="1653313176419" duration="17000" />
+      <workItem from="1659091203969" duration="5596000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1592222335495</created>
@@ -1329,7 +1340,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651224611220</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="notification">
+      <created>1651318199839</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1651318199839</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1394,7 +1412,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="init" />
     <MESSAGE value="change phone fields as rufnummer_3" />
     <MESSAGE value="update and issue" />
     <MESSAGE value="update and issue for loading message" />
@@ -1419,7 +1436,8 @@
     <MESSAGE value="auto close popup" />
     <MESSAGE value="add telegram notification" />
     <MESSAGE value="disable old whatsapp sdk" />
-    <option name="LAST_COMMIT_MESSAGE" value="disable old whatsapp sdk" />
+    <MESSAGE value="notification" />
+    <option name="LAST_COMMIT_MESSAGE" value="notification" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/application/models/Log_model.php">

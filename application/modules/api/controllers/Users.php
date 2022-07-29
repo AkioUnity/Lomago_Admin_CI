@@ -320,8 +320,14 @@ class Users extends Whatsapp
         if (isset($telegram) && !(empty($telegram->chat_id))){
             $customerName = $wpDb->select('user_login')->where('ID', $customer_id)->from('pts_useradressen'.$this->wa_portal_id)->get()->row()->user_login;
             $consultantName = $wpDb->select('bezeichnung')->where('ID', $consultant_id)->from('pts_berater_profile'.$this->wa_portal_id)->get()->row()->bezeichnung;
-            $message=($text=='request')?'request':'message';
-            $text="Hello ".$consultantName.", you have a new ".$message." on LAMOGA from ".$customerName;
+
+//            $message=($text=='request')?'request':'message';
+            $auto_step=($text=='request')?2:1;
+            $query = $wpDb->select('text')->where('type', 'consultant_notification')->where('step', $auto_step)->from('auto_messages'.$this->wa_portal_id)->get();
+            $replyText = $query->row()->text;
+            $text = str_replace('$customer', $customerName, $replyText);
+
+//            $text="Hello ".$consultantName.", you have a new ".$message." on LAMOGA from ".$customerName;
 //https://www.lomago.io:1337/send_telegram?text=telegram&page_id=3357824640
             $url = 'https://www.lomago.io:1337/send_telegram?';
             $url = $url . "page_id=" . $telegram->chat_id . "&text=" . urlencode($text);

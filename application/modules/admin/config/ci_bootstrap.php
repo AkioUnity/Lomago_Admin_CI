@@ -79,6 +79,8 @@ $config['ci_bootstrap'] = array(
                 'Whatsapp'			=> 'auto/text/whatsapp',
                 'Facebook'		=> 'auto/text/facebook',
                 'Telegram'	=> 'auto/text/telegram',
+                'Consultant'		=> 'auto/text/consultant',
+                'Consultant Notification'	=> 'auto/text/consultant_notification',
             )
         ),
         'online' => array(
